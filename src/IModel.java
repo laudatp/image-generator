@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents the model for the image processing application.
  * This is post-class practice
@@ -10,13 +12,13 @@ public interface IModel {
      * Loads this image from a file.
      * @param imageInfile
      */
-    void load(String imageInfile);
+    void load(String imageInfile) throws IOException;
 
     /**
      * Saves this image to a file.
      * @param imageOutfile
      */
-    void save(String imageOutfile);
+    void save(String imageOutfile) throws IOException;
 
 
     /**
