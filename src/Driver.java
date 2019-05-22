@@ -5,11 +5,21 @@ public class Driver {
 
     public static void main(String[] args) throws IOException {
         model = new Model();
-        model.load("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\van.jpg");
-        model.blur();
-        model.blur();
-        model.blur();
-        model.save("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\blurredvan.jpg");
+        model.generateHorizontalRainbowStripeImage(2000,3000);
+        model.save("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\hRainbow.jpg");
+
+        model.generateVerticalRainbowStripeImage(2000,3000);
+        model.save("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\vRainbow.jpg");
+
+        //model.load("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\van.jpg");
+        //model.sharpen();
+        //model.sharpen();
+        //model.save("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\sharpenedvan.jpg");
+        //model.load("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\van.jpg");
+        //model.blur();
+        //model.blur();
+        //model.save("C:\\Users\\Peter\\mygitworkspace\\git-repos\\mvcPractice\\blurredvan.jpg");
+
 
     }
 }
