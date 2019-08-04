@@ -58,7 +58,7 @@ public interface IModel {
      * Generate checkerboard patterned image.
      * @param width this image's checkerboard squares' length
      */
-    void generateCheckerBoard(int width);
+    void generateCheckerboardImage(int width);
 
 
     /**
