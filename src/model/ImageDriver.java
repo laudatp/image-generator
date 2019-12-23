@@ -7,8 +7,9 @@ public class ImageDriver {
   public static final String CHECKERBOARD = "checkerboard";
   public static final String FRANCE_FLAG = "franceFlag";
   public static final String GREECE_FLAG = "greeceFlag";
+  public static final String SWITZERLAND_FLAG = "switzerlandFlag";
 
-  public static Image image;
+  protected static Image image;
 
   public static void main(String[] args) throws Exception {
     ImageFactory imageFactory = new ImageFactoryImpl();
@@ -88,6 +89,25 @@ public class ImageDriver {
     image.load(getPath(GREECE_FLAG));
     image.sepia();
     image.save(getPath("sepiaedGreeceFlag"));
+
+    image = imageFactory.makeImage(SWITZERLAND_FLAG, 900);
+    image.save(getPath(SWITZERLAND_FLAG));
+
+    image.load(getPath(SWITZERLAND_FLAG));
+    image.sharpen();
+    image.save(getPath("sharpenedSwitzerlandFlag"));
+
+    image.load(getPath(SWITZERLAND_FLAG));
+    image.blur();
+    image.save(getPath("blurredSwitzerlandFlag"));
+
+    image.load(getPath(SWITZERLAND_FLAG));
+    image.grayscale();
+    image.save(getPath("grayscaledSwitzerlandFlag"));
+
+    image.load(getPath(SWITZERLAND_FLAG));
+    image.sepia();
+    image.save(getPath("sepiaedSwitzerlandFlag"));
 
   }
 
