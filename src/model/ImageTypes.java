@@ -16,8 +16,8 @@ HORIZONTAL_RAINBOW_STRIPES("horizontalrainbow"),
 VERTICAL_RAINBOW_STRIPES("verticalrainbow"),
 CHECKERBOARD("checkerboard"),
 FRANCE_FLAG("franceflag"),
-GREECE_FLAG("greeceflag");
-// SWISS_FLAG_IMAGE
+GREECE_FLAG("greeceflag"),
+SWITZERLAND_FLAG("switzerlandflag");
 
 private static Map<String, ImageTypes> imageTypesByName = new HashMap<>();
 private String name;

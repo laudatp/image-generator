@@ -3,6 +3,7 @@ package model;
 public class ImageFactoryImpl implements ImageFactory {
 
   public ImageFactoryImpl() {
+    // Intentionally blank.
   }
 
   @Override
@@ -28,8 +29,8 @@ public class ImageFactoryImpl implements ImageFactory {
         return new FranceFlag(width);
       case GREECE_FLAG:
         return new GreeceFlag(width);
-      // case SWISS_FLAG_IMAGE:
-      // return new SwissFlagImage(imageType);
+      case SWITZERLAND_FLAG:
+        return new SwitzerlandFlag(width);
       default:
         throw new Exception("Invalid image type");
     }
