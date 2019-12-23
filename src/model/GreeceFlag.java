@@ -25,8 +25,8 @@ public class GreeceFlag extends ImageImpl {
 
   protected int[][][] generateHorizontalStripes(int imageWidth) {
     int stripeCount = 9;
-    int imageHeight = (int) (((double) 2 / (double) 3) * imageWidth);
-    int stripeHeight = (int) (((double) imageHeight) / ((double) stripeCount));
+    int imageHeight = (36 * imageWidth) / 54;
+    int stripeHeight = imageHeight / 9;
     int[][][] newRGB = new int[imageHeight][imageWidth][NUMBER_OF_CHANNELS];
 
     int verticalStripeLeftEdge = (int) (((double) 8 / (double) 54) * imageWidth);
@@ -58,6 +58,38 @@ public class GreeceFlag extends ImageImpl {
             }
           }
         }
+      }
+      color = swapColors(color);
+    }
+
+    color = Color.white;
+    colorChannelMagnitudes = getColorChannelMagnitudes(color);
+    for (int h = 5; h < 9; h++) {
+      for (int i = h * stripeHeight; i < (h + 1) * stripeHeight; i++) {
+        colorChannelMagnitudes = getColorChannelMagnitudes(color);
+        // for (int g = 0; g < 13; g++) {
+        for (int j = 0; j < imageWidth; j++) {
+          for (int k = 0; k < NUMBER_OF_CHANNELS; k++) {
+            newRGB[i][j][k] = colorChannelMagnitudes[k];
+          }
+        }
+        // }
+      }
+      color = swapColors(color);
+    }
+
+    color = Color.blue;
+    colorChannelMagnitudes = getColorChannelMagnitudes(color);
+    for (int h = 0; h < 5; h++) {
+      for (int i = h * stripeHeight; i < (h + 1) * stripeHeight; i++) {
+        colorChannelMagnitudes = getColorChannelMagnitudes(color);
+        // for (int g = 5; g < 13; g++) {
+        for (int j = 20 * imageWidth / 54; j < imageWidth; j++) {
+          for (int k = 0; k < NUMBER_OF_CHANNELS; k++) {
+            newRGB[i][j][k] = colorChannelMagnitudes[k];
+          }
+        }
+        // }
       }
       color = swapColors(color);
     }
