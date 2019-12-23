@@ -24,55 +24,112 @@ public class GreeceFlag extends ImageImpl {
   }
 
   protected int[][][] generateHorizontalStripes(int imageWidth) {
-    int stripeCount = 9;
-    int imageHeight = (int) (((double) 2 / (double) 3) * imageWidth);
-    int stripeHeight = (int) (((double) imageHeight) / ((double) stripeCount));
+    Color color = Color.blue;
+    int imageHeight = (36 * imageWidth) / 54;
     int[][][] newRGB = new int[imageHeight][imageWidth][NUMBER_OF_CHANNELS];
 
-    int verticalStripeLeftEdge = (int) (((double) 8 / (double) 54) * imageWidth);
-    int verticalStripeWidth = (int) (((double) 4 / (double) 54) * imageWidth);
+    for (int i = 0; i < imageHeight; i++) {
 
-    Color color = Color.blue;
-    int[] colorChannelMagnitudes = getColorChannelMagnitudes(color);
-    for (int h = 0; h < 5; h++) {
-      for (int i = h * stripeHeight; i < (h + 1) * stripeHeight; i++) {
-        colorChannelMagnitudes = getColorChannelMagnitudes(color);
-        for (int g = 0; g < 5; g++) {
-          for (int j = g * verticalStripeWidth; j < (g + 1) * verticalStripeWidth; j++) {
+      for (int j = 0; j < imageWidth; j++) {
 
-            if (2 * verticalStripeWidth < j && j < 3 * verticalStripeWidth) {
-              color = Color.white;
-            } else {
-              color = Color.blue;
-            }
+        if (0 <= i && i < 4 * imageWidth / 54 && 0 <= j && j < 8 * imageWidth / 54) {
+          color = Color.blue;
+        }
+        if (0 <= i && i < 4 * imageWidth / 54 && 8 * imageWidth / 54 <= j
+            && j < 12 * imageWidth / 54) {
+          color = Color.white;
+        }
 
-            if (2 * stripeHeight < i && i < 3 * stripeHeight && 0 < j
-                && j < 5 * verticalStripeWidth) {
-              color = Color.white;
-            }
+        if (0 <= i && i < 4 * imageWidth / 54 && 12 * imageWidth / 54 <= j && j < imageWidth) {
+          color = Color.blue;
+        }
 
-            colorChannelMagnitudes = getColorChannelMagnitudes(color);
+        if (4 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 0 <= j
+            && j < 8 * imageWidth / 54) {
+          color = Color.blue;
+        }
 
-            for (int k = 0; k < NUMBER_OF_CHANNELS; k++) {
-              newRGB[i][j][k] = colorChannelMagnitudes[k];
-            }
-          }
+        if (4 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 8 * imageWidth / 54 <= j
+            && j < 20 * imageWidth / 54) {
+          color = Color.white;
+        }
+
+        if (4 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 12 * imageWidth / 54 <= j
+            && j < 20 * imageWidth / 54) {
+          color = Color.blue;
+        }
+
+        if (4 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 20 * imageWidth / 54 <= j
+            && j < imageWidth) {
+          color = Color.white;
+        }
+
+        if (8 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 0 <= j
+            && j < 20 * imageWidth / 54) {
+          color = Color.white;
+        }
+
+        if (8 * imageWidth / 54 <= i && i < 12 * imageWidth / 54 && 20 * imageWidth / 54 <= j
+            && j < imageWidth) {
+          color = Color.blue;
+        }
+
+        if (12 * imageWidth / 54 <= i && i < 16 * imageWidth / 54 && 0 <= j
+            && j < 8 * imageWidth / 54) {
+          color = Color.blue;
+        }
+
+        if (12 * imageWidth / 54 <= i && i < 16 * imageWidth / 54 && 8 * imageWidth / 54 <= j
+            && j < 12 * imageWidth / 54) {
+          color = Color.white;
+        }
+
+        if (12 * imageWidth / 54 <= i && i < 16 * imageWidth / 54 && 12 * imageWidth / 54 <= j
+            && j < 20 * imageWidth / 54) {
+          color = Color.blue;
+        }
+
+        if (12 * imageWidth / 54 <= i && i < 16 * imageWidth / 54 && 20 * imageWidth / 54 <= j
+            && j < imageWidth) {
+          color = Color.white;
+        }
+
+        if (16 * imageWidth / 54 <= i && i < 20 * imageWidth / 54 && 0 <= j
+            && j < 8 * imageWidth / 54) {
+          color = Color.blue;
+        }
+
+        if (16 * imageWidth / 54 <= i && i < 20 * imageWidth / 54 && 8 * imageWidth / 54 <= j
+            && j < 12 * imageWidth / 54) {
+          color = Color.white;
+        }
+
+        if (16 * imageWidth / 54 <= i && i < 20 * imageWidth / 54 && 12 * imageWidth / 54 <= j
+            && j < imageWidth) {
+          color = Color.blue;
+        }
+
+        if (20 * imageWidth / 54 <= i && i < 24 * imageWidth / 54 && 0 <= j && j < imageWidth) {
+          color = Color.white;
+        }
+
+        if (24 * imageWidth / 54 <= i && i < 28 * imageWidth / 54 && 0 <= j && j < imageWidth) {
+          color = Color.blue;
+        }
+
+        if (28 * imageWidth / 54 <= i && i < 32 * imageWidth / 54 && 0 <= j && j < imageWidth) {
+          color = Color.white;
+        }
+
+        if (32 * imageWidth / 54 <= i && i < 36 * imageWidth / 54 && 0 <= j && j < imageWidth) {
+          color = Color.blue;
+        }
+        int[] colorChannelMagnitudes = getColorChannelMagnitudes(color);
+        for (int k = 0; k < NUMBER_OF_CHANNELS; k++) {
+          newRGB[i][j][k] = colorChannelMagnitudes[k];
         }
       }
-      color = swapColors(color);
     }
-
     return newRGB;
   }
-
-  private Color swapColors(Color color) {
-    Color newColor = color;
-    if (color.equals(Color.blue)) {
-      newColor = Color.white;
-    } else if (color.equals(Color.white)) {
-      newColor = Color.blue;
-    }
-    return newColor;
-  }
-
 }
