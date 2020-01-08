@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package image.archive;
 
 import java.awt.Color;
 
@@ -11,7 +11,7 @@ import java.awt.Color;
  * @author Peter
  *
  */
-public class SwitzerlandFlag extends ImageImpl {
+public class SwitzerlandFlag {
 
   /**
    * Draws the flag of Switzerland.
@@ -20,7 +20,7 @@ public class SwitzerlandFlag extends ImageImpl {
    */
   public SwitzerlandFlag(int imageWidth) {
     super(imageWidth);
-    rgb = generateHorizontalStripes(imageWidth);
+    setRGB(generateHorizontalStripes(imageWidth));
   }
 
   protected int[][][] generateHorizontalStripes(int imageWidth) {

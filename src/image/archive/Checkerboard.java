@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package image.archive;
 
 import java.awt.Color;
 
@@ -10,8 +10,8 @@ import java.awt.Color;
  *
  * @param width this image's checkerboard squares' length
  */
-public class Checkerboard extends ImageImpl {
-  private static final Color[] CHECKERBOARD_COLORS = {Color.black,Color.white};
+public class Checkerboard {
+  private static final Color[] COLORS = {Color.black,Color.white};
 
   /**
    * @param height
@@ -19,7 +19,7 @@ public class Checkerboard extends ImageImpl {
    */
   public Checkerboard(int squareWidth) {
     super(squareWidth);
-    rgb = generateCheckerboard(squareWidth);
+    setRGB(generateCheckerboard(squareWidth));
   }
 
   /**
@@ -36,14 +36,14 @@ public class Checkerboard extends ImageImpl {
     int imageHeight = imageWidth;
 
     // Pixel colors represented by their integer rgb values
-    int[][] colorChannels = new int[CHECKERBOARD_COLORS.length][NUMBER_OF_CHANNELS];
+    int[][] colorChannels = new int[COLORS.length][NUMBER_OF_CHANNELS];
 
     int[][][] newRGB = new int[imageHeight][imageWidth][NUMBER_OF_CHANNELS];
 
     // Get the pixel color channels
-    for (int i = 0; i < CHECKERBOARD_COLORS.length; i++) {
+    for (int i = 0; i < COLORS.length; i++) {
       for (int j = 0; j < NUMBER_OF_CHANNELS; j++) {
-        colorChannels[i] = generatePixel(CHECKERBOARD_COLORS[i]);
+        colorChannels[i] = getColorChannelMagnitudes(COLORS[i]);
       }
     }
 

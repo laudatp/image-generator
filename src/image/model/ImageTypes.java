@@ -1,4 +1,4 @@
-package model;
+package image.model;
 
 /**
  * 
@@ -12,8 +12,8 @@ import java.util.Map;
  *
  */
 public enum ImageTypes {
-HORIZONTAL_RAINBOW_STRIPES("horizontalrainbow"),
-VERTICAL_RAINBOW_STRIPES("verticalrainbow"),
+HORIZONTAL_RAINBOW_STRIPES("horizontalrainbowstripes"),
+VERTICAL_RAINBOW_STRIPES("verticalrainbowstripes"),
 CHECKERBOARD("checkerboard"),
 FRANCE_FLAG("franceflag"),
 GREECE_FLAG("greeceflag"),
