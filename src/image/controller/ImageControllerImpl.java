@@ -16,6 +16,9 @@ import image.model.Image;
  */
 public class ImageControllerImpl implements ImageController {
 
+    /** Filename extension. */
+    private static final String FILE_EXT = ".jpg";
+
     /** The input source. */
     private final Readable in;
 
@@ -25,13 +28,8 @@ public class ImageControllerImpl implements ImageController {
 
     @Override
     public void go(Image image) throws IOException {
-        String commandFile = "";
-        String filenameExtension = ".jpg";
         String line = "";
         String imageCommand = "";
-        int imageHeight = 0;
-        int imageWidth = 0;
-        int cellWidth = 0;
         try (Scanner sc = new Scanner(this.in)) {
             while (sc.hasNextLine()) {
                 // read a line
@@ -43,64 +41,40 @@ public class ImageControllerImpl implements ImageController {
                         imageCommand = tokens.next();
                         switch (imageCommand) {
                             case "load":
-                                loadCommandFile(image, filenameExtension, tokens);
+                                loadCommandFile(image, tokens);
                                 break;
                             case "save":
-                                saveImage(image, filenameExtension, tokens);
+                                writeImageFile(image, tokens);
                                 break;
                             case "drawhorizontalrainbowstripes":
-                                if (tokens.hasNextInt()) {
-                                    imageHeight = tokens.nextInt();
-                                }
-                                if (tokens.hasNextInt()) {
-                                    imageWidth = tokens.nextInt();
-                                }
-                                image.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+                                drawHorizontalRainbowStripes(image, tokens);
                                 break;
                             case "drawverticalrainbowstripes":
-                                if (tokens.hasNextInt()) {
-                                    imageHeight = tokens.nextInt();
-                                }
-                                if (tokens.hasNextInt()) {
-                                    imageWidth = tokens.nextInt();
-                                }
-                                image.drawVerticalRainbowStripes(imageHeight, imageWidth);
+                                drawVerticalRainbowStripes(image, tokens);
                                 break;
                             case "drawcheckerboard":
-                                if (tokens.hasNextInt()) {
-                                    cellWidth = tokens.nextInt();
-                                }
-                                image.drawCheckerBoard(cellWidth);
+                                drawCheckerBoard(image, tokens);
                                 break;
                             case "drawfranceflag":
-                                if (tokens.hasNextInt()) {
-                                    imageWidth = tokens.nextInt();
-                                }
-                                image.drawFranceFlag(imageWidth);
+                                drawFranceFlag(image, tokens);
                                 break;
                             case "drawswitzerlandflag":
-                                if (tokens.hasNextInt()) {
-                                    imageWidth = tokens.nextInt();
-                                }
-                                image.drawSwitzerlandFlag(imageWidth);
+                                drawSwitzerlandFlag(image, tokens);
                                 break;
                             case "drawgreeceflag":
-                                if (tokens.hasNextInt()) {
-                                    imageWidth = tokens.nextInt();
-                                }
-                                image.drawGreeceFlag(imageWidth);
+                                drawGreeceFlag(image, tokens);
                                 break;
                             case "blur":
-                                image.blur();
+                                blur(image);
                                 break;
                             case "sharpen":
-                                image.sharpen();
+                                sharpen(image);
                                 break;
                             case "grayscale":
-                                image.grayscale();
+                                grayscale(image);
                                 break;
                             case "sepia":
-                                image.sepia();
+                                sepia(image);
                                 break;
                             case "quit":
                                 System.out.println("Quitting program");
@@ -116,16 +90,119 @@ public class ImageControllerImpl implements ImageController {
     }
 
     /**
+     * Sepia filter the image.
+     * 
+     * @param image
+     */
+    private void sepia(Image image) {
+        image.sepia();
+    }
+
+    /**
+     * Grayscale filter the image.
+     * 
+     * @param image
+     */
+    private void grayscale(Image image) {
+        image.grayscale();
+    }
+
+    /**
+     * Sharpen the image.
+     * 
+     * @param image
+     */
+    private void sharpen(Image image) {
+        image.sharpen();
+    }
+
+    /**
+     * Blur the image.
+     * 
+     * @param image
+     */
+    private void blur(Image image) {
+        image.blur();
+    }
+
+    /**
+     * Draw Greece's flag.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawGreeceFlag(Image image, Scanner tokens) {
+        int imageWidth = tokens.nextInt();
+        image.drawGreeceFlag(imageWidth);
+    }
+
+    /**
+     * Draw Switzerland's flag.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawSwitzerlandFlag(Image image, Scanner tokens) {
+        int imageWidth = tokens.nextInt();
+        image.drawSwitzerlandFlag(imageWidth);
+    }
+
+    /**
+     * Draw France's flag.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawFranceFlag(Image image, Scanner tokens) {
+        int imageWidth = tokens.nextInt();
+        image.drawFranceFlag(imageWidth);
+    }
+
+    /**
+     * Draw a checkerboard.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawCheckerBoard(Image image, Scanner tokens) {
+        int cellWidth = tokens.nextInt();
+        image.drawCheckerBoard(cellWidth);
+    }
+
+    /**
+     * Draw vertical rainbow striped image with given image height and width.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawVerticalRainbowStripes(Image image, Scanner tokens) {
+        int imageHeight = tokens.nextInt();
+        int imageWidth = tokens.nextInt();
+        image.drawVerticalRainbowStripes(imageHeight, imageWidth);
+    }
+
+    /**
+     * Draw horizontal rainbow striped image with given image height and width.
+     * 
+     * @param image
+     * @param tokens
+     */
+    private void drawHorizontalRainbowStripes(Image image, Scanner tokens) {
+        int imageHeight = tokens.nextInt();
+        int imageWidth = tokens.nextInt();
+        image.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+    }
+
+    /**
      * Write image to a file.
      * 
      * @param  image
-     * @param  filenameExtension
      * @param  tokens
      * @throws IOException
      */
-    private void saveImage(Image image, String filenameExtension, Scanner tokens) throws IOException {
+    private void writeImageFile(Image image, Scanner tokens) throws IOException {
         String filename;
-        filename = tokens.next() + filenameExtension;
+        filename = tokens.next() + FILE_EXT;
         image.save(filename);
     }
 
@@ -133,13 +210,12 @@ public class ImageControllerImpl implements ImageController {
      * Load the file containing the image commands.
      * 
      * @param  image
-     * @param  filenameExtension
      * @param  tokens
      * @throws IOException
      */
-    private void loadCommandFile(Image image, String filenameExtension, Scanner tokens) throws IOException {
+    private void loadCommandFile(Image image, Scanner tokens) throws IOException {
         String commandFile;
-        commandFile = tokens.next() + filenameExtension;
+        commandFile = tokens.next() + FILE_EXT;
         image.load(commandFile);
     }
 
