@@ -10,18 +10,23 @@ import image.model.ImageImpl;
 
 public class ImageDriver {
 
-  public static void main(String[] args) throws IOException {
+    /**
+     * Drives the image application.
+     * 
+     * @param  args
+     * @throws IOException if input file read problems
+     */
+    public static void main(String[] args) throws IOException {
 
-    try {
-      Readable in =
-          new FileReader("C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/imageCommands.txt");
-      ImageController controller = new ImageControllerImpl(in);
-      Image image = new ImageImpl();
-      controller.go(image);
-    } catch (IOException e1) {
-      e1.printStackTrace();
+        try {
+            Readable in = new FileReader("C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/imageCommands.txt");
+            ImageController controller = new ImageControllerImpl(in);
+            Image image = new ImageImpl();
+            controller.go(image);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
     }
-
-  }
 
 }

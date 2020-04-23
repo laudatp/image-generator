@@ -1,83 +1,83 @@
 drawhorizontalRainbowStripes 600 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/horizontalRainbow
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedHorizontalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/horizontalRainbow
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredHorizontalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/horizontalRainbow
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledHorizontalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/horizontalRainbow
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedHorizontalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedHorizontalRainbowStripes
 drawverticalRainbowStripes 600 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/verticalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/verticalRainbowStripes
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedVerticalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/verticalRainbowStripes
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredVerticalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/verticalRainbowStripes
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledVerticalRainbowStripes
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/verticalRainbowStripes
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedVerticalRainbowStripes
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedVerticalRainbowStripes
 drawcheckerboard 100
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/checkerboard
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/checkerboard
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedcheckerboard
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/checkerboard
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredcheckerboard
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/checkerboard
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledcheckerboard
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/checkerboard
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedcheckerboard
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedcheckerboard
 drawfranceFlag 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/franceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/franceFlag
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedFranceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/franceFlag
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredFranceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/franceFlag
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledFranceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/franceFlag
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedFranceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedFranceFlag
 drawgreeceFlag 900
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/greeceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/greeceFlag
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedGreeceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/greeceFlag
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredGreeceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/greeceFlag
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledGreeceFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/greeceFlag
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedGreeceFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedGreeceFlag
 drawswitzerlandFlag 900
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/switzerlandFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/switzerlandFlag
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sharpenedSwitzerlandFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/switzerlandFlag
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/blurredSwitzerlandFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/switzerlandFlag
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/grayscaledSwitzerlandFlag
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/switzerlandFlag
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedSwitzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/sepiaedSwitzerlandFlag

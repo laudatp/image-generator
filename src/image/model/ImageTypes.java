@@ -23,26 +23,26 @@ private static Map<String, ImageTypes> imageTypesByName = new HashMap<>();
 private String name;
 
 static {
-  for (ImageTypes i : ImageTypes.values()) {
-    imageTypesByName.put(i.getName(), i);
-  }
+    for (ImageTypes i : ImageTypes.values()) {
+        imageTypesByName.put(i.getName(), i);
+    }
 }
 
 private ImageTypes(String name) {
-  this.name = name;
+    this.name = name;
 }
 
 public String getName() {
-  return name;
+    return name;
 }
 
 public static ImageTypes getImageTypesByName(String name) {
-  return imageTypesByName.get(name);
+    return imageTypesByName.get(name);
 }
 
 @Override
 public String toString() {
-  return this.name;
+    return this.name;
 }
 
 }

@@ -17,26 +17,26 @@ private static Map<String, ImageCommands> imageCommandsByName = new HashMap<>();
 private String name;
 
 static {
-  for (ImageCommands i : ImageCommands.values()) {
-    imageCommandsByName.put(i.getName(), i);
-  }
+    for (ImageCommands i : ImageCommands.values()) {
+        imageCommandsByName.put(i.getName(), i);
+    }
 }
 
 private ImageCommands(String name) {
-  this.name = name;
+    this.name = name;
 }
 
 public String getName() {
-  return name;
+    return name;
 }
 
 public static ImageCommands getImageCommandsByName(String name) {
-  return imageCommandsByName.get(name);
+    return imageCommandsByName.get(name);
 }
 
 @Override
 public String toString() {
-  return this.name;
+    return this.name;
 }
 
 }

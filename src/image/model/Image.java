@@ -10,52 +10,52 @@ import java.io.IOException;
  */
 public interface Image {
 
-  /**
-   * Loads this image from a file.
-   * 
-   * @param  imageInfile
-   * @throws IOException
-   */
-  void load(String imageInfile) throws IOException;
+    /**
+     * Loads this image from a file.
+     * 
+     * @param  imageInfile
+     * @throws IOException
+     */
+    void load(String imageInfile) throws IOException;
 
-  /**
-   * Saves this image to a file.
-   * 
-   * @param  imageOutfile
-   * @throws IOException
-   */
-  void save(String imageOutfile) throws IOException;
+    /**
+     * Saves this image to a file.
+     * 
+     * @param  imageOutfile
+     * @throws IOException
+     */
+    void save(String imageOutfile) throws IOException;
 
-  /**
-   * Blur this image.
-   */
-  void blur();
+    /**
+     * Blur this image.
+     */
+    void blur();
 
-  /**
-   * Sharpen this image.
-   */
-  void sharpen();
+    /**
+     * Sharpen this image.
+     */
+    void sharpen();
 
-  /**
-   * Grayscale this image.
-   */
-  void grayscale();
+    /**
+     * Grayscale this image.
+     */
+    void grayscale();
 
-  /**
-   * Sepia this image.
-   */
-  void sepia();
+    /**
+     * Sepia this image.
+     */
+    void sepia();
 
-  void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
+    void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
 
-  void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
+    void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
 
-  void drawCheckerBoard(int cellWidth);
+    void drawCheckerBoard(int cellWidth);
 
-  void drawFranceFlag(int flagWidth);
+    void drawFranceFlag(int flagWidth);
 
-  void drawSwitzerlandFlag(int flagWidth);
+    void drawSwitzerlandFlag(int flagWidth);
 
-  void drawGreeceFlag(int flagWidth);
+    void drawGreeceFlag(int flagWidth);
 
 }
