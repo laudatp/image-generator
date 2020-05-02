@@ -8,5 +8,5 @@ package image.model;
  *
  */
 public interface ImageFactory {
-  public Image generateImage(String imageName, int imageHeight, int imageWidth);
+  public Model generateModel(String imageName, int imageHeight, int imageWidth);
 }

@@ -5,12 +5,12 @@ package image.archive;
 
 import java.awt.Color;
 
-import image.model.ImageImpl;
+import image.model.ModelImpl;
 
 /**
- * Rectangular horizontally striped rainbow image.
+ * Rectangular horizontally striped rainbow model.
  */
-public class HorizontalRainbow extends ImageImpl {
+public class HorizontalRainbow extends ModelImpl {
 
   public HorizontalRainbow(int imageHeight, int imageWidth) {
     super(imageHeight, imageWidth);
@@ -18,11 +18,11 @@ public class HorizontalRainbow extends ImageImpl {
   }
 
   /**
-   * Generate horizontally striped image assuming one stripe per unique color.
+   * Generate horizontally striped model assuming one stripe per unique color.
    *
    * @param  imageHeight stripe height
    * @param  imageWidth  stripe width
-   * @return             newRGB image
+   * @return             newRGB model
    */
   protected int[][][] generateHorizontalStripes(int imageHeight, int imageWidth) {
     Color[] colors = getRainbowColors();
@@ -31,7 +31,7 @@ public class HorizontalRainbow extends ImageImpl {
     // Calculate the stripe thickness
     int stripeThickness = (int) Math.round((double) imageHeight / colorCount);
     // Generate each stripe one pixel thickness at a time until full stripe thickness is reached and
-    // assign each stripe to the image
+    // assign each stripe to the model
     for (int h = 0; h < colorCount; h++) {
       int[] channelColors = {colors[h].getRed(),colors[h].getGreen(),colors[h].getBlue()};
       if (h < colorCount - 1) {

@@ -9,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
- * This class contains utility methods to read an image from file and write to a file.
+ * This class contains utility methods to read an model from file and write to a file.
  */
 public class ImageUtil {
 
@@ -18,11 +18,11 @@ public class ImageUtil {
     }
 
     /**
-     * Read an image file and return the contents as an array.
+     * Read an model file and return the contents as an array.
      *
      * @param  filename the path of the file. Look at the ImageIO documentation to see which file
      *                  formats are supported.
-     * @return          the image as a 3D array of integer values
+     * @return          the model as a 3D array of integer values
      */
     public static int[][][] readImage(String filename) throws IOException {
         BufferedImage input;
@@ -44,9 +44,9 @@ public class ImageUtil {
     }
 
     /**
-     * Convenience function to get the width of an image.
+     * Convenience function to get the width of an model.
      *
-     * @param  filename    the full path of the image file. Look at the ImageIO class to see which file
+     * @param  filename    the full path of the model file. Look at the ImageIO class to see which file
      *                     formats are supported
      * @return             the width of the file
      * @throws IOException if the file is not found
@@ -61,9 +61,9 @@ public class ImageUtil {
     }
 
     /**
-     * Convenience function to get the height of an image.
+     * Convenience function to get the height of an model.
      *
-     * @param  filename    the full path of the image file. Look at the ImageIO class to see which file
+     * @param  filename    the full path of the model file. Look at the ImageIO class to see which file
      *                     formats are supported
      * @return             the height of the file
      * @throws IOException if the file is not found
@@ -77,13 +77,13 @@ public class ImageUtil {
     }
 
     /**
-     * Write an image to a file in a given format.
+     * Write an model to a file in a given format.
      *
-     * @param  rgb         the image data as a 3D array of integers. The dimensions are row, col and
+     * @param  rgb         the model data as a 3D array of integers. The dimensions are row, col and
      *                     channel respectively
-     * @param  width       the width of the image
-     * @param  height      the height of the image
-     * @param  filename    the full path of where the image must be stored. This should include the name
+     * @param  width       the width of the model
+     * @param  height      the height of the model
+     * @param  filename    the full path of where the model must be stored. This should include the name
      *                     and extension of the file
      * @throws IOException if the file cannot be written to the provided path
      */

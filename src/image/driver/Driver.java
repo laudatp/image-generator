@@ -3,15 +3,15 @@ package image.driver;
 import java.io.FileReader;
 import java.io.IOException;
 
-import image.controller.ImageController;
-import image.controller.ImageControllerImpl;
-import image.model.Image;
-import image.model.ImageImpl;
+import image.controller.Controller;
+import image.controller.BatchControllerImpl;
+import image.model.Model;
+import image.model.ModelImpl;
 
-public class ImageDriver {
+public class Driver {
 
     /**
-     * Drives the image application.
+     * Drives the model application.
      * 
      * @param  args
      * @throws IOException if input file read problems
@@ -20,13 +20,12 @@ public class ImageDriver {
 
         try {
             Readable in = new FileReader("C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/imageCommands.txt");
-            ImageController controller = new ImageControllerImpl(in);
-            Image image = new ImageImpl();
-            controller.go(image);
+            Controller controller = new BatchControllerImpl(in);
+            Model model = new ModelImpl();
+            controller.go(model);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
 
     }
-
 }

@@ -6,7 +6,7 @@ package image.archive;
 import java.awt.Color;
 
 /**
- * Generate rectangular image of vertically striped rainbow.
+ * Generate rectangular model of vertically striped rainbow.
  *
  */
 public class VerticalRainbow {

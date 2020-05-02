@@ -3,31 +3,31 @@ package image.model;
 import java.awt.Color;
 import java.io.IOException;
 
-public class ImageImpl implements Image {
+public class ModelImpl implements Model {
     /**
      * Count of color channels.
      */
     protected static final int NUMBER_OF_CHANNELS = 3;
 
     /**
-     * Represents image's pixels by means of rows and columns of overlaid red, green, blue channels with
+     * Represents model's pixels by means of rows and columns of overlaid red, green, blue channels with
      * various magnitudes.
      */
     private int[][][] rgb;
 
-    public ImageImpl() {
+    public ModelImpl() {
     }
 
-    public ImageImpl(int height, int width) {
+    public ModelImpl(int height, int width) {
         rgb = new int[height][width][NUMBER_OF_CHANNELS];
     }
 
-    public ImageImpl(int width) {
+    public ModelImpl(int width) {
         rgb = new int[width][width][NUMBER_OF_CHANNELS];
     }
 
     /**
-     * Loads this image from a file.
+     * Loads this model from a file.
      *
      * @param imageInfile full pathname of the .jpg, .png, file to be read
      */
@@ -37,7 +37,7 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Saves this image to a .jpg or .png image file.
+     * Saves this model to a .jpg or .png model file.
      *
      * @param imageOutfile full path name for the file to be written
      */
@@ -47,16 +47,16 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Blurs this image.
+     * Blurs this model.
      */
     @Override
     public void blur() {
-        // Replace original image with blurred image.
+        // Replace original model with blurred model.
         rgb = blurRGB();
     }
 
     /**
-     * Sharpen this image.
+     * Sharpen this model.
      */
     @Override
     public void sharpen() {
@@ -64,7 +64,7 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Grayscale this image.
+     * Grayscale this model.
      */
     @Override
     public void grayscale() {
@@ -72,7 +72,7 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Sepia this image.
+     * Sepia this model.
      */
     @Override
     public void sepia() {
@@ -148,18 +148,18 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Filter image (blur or sharpen it).
+     * Filter model (blur or sharpen it).
      * 
      * @param  kernel
-     * @return        filtered image
+     * @return        filtered model
      */
     private int[][][] filterRGB(double[][] kernel) {
-        // Get the count of the image's rows.
+        // Get the count of the model's rows.
         int nRows = rgb.length;
-        // Get the count of the image's columns.
+        // Get the count of the model's columns.
         int nCols = rgb[0].length;
 
-        // Create filtered image holder to capture the modified pixels
+        // Create filtered model holder to capture the modified pixels
         int[][][] filteredRgb = new int[nRows][nCols][NUMBER_OF_CHANNELS];
 
         // Filter each pixel (row, column, channel)
@@ -185,7 +185,7 @@ public class ImageImpl implements Image {
      */
     private int getFilteredPixel(int rgbRow, int rgbCol, int channel, double[][] kernel) {
 
-        // Get the count of the image's rows and columns.
+        // Get the count of the model's rows and columns.
         int rgbRowCount = rgb.length;
         int rgbColCount = rgb[0].length;
 
@@ -194,7 +194,7 @@ public class ImageImpl implements Image {
         int kColCount = kernel[0].length;
 
         // Calculate the edge overlap when overlaying this kernel's center over this
-        // image's edge
+        // model's edge
         // pixels.
         int overlap = kernel.length / 2;
 
@@ -203,7 +203,7 @@ public class ImageImpl implements Image {
         // Matrix multiply the kernel matrix times the matrix of pixels it overlays when
         // the kernel
         // center is placed
-        // over the the provided image pixel (rgbRow, rgbCol, channel).
+        // over the the provided model pixel (rgbRow, rgbCol, channel).
         for (int i = 0; i < kRowCount; i++) {
             int kernelRowOverlapIndex = rgbRow - overlap + i;
             for (int j = 0; j < kColCount; j++) {
@@ -312,11 +312,11 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Generate horizontally striped image assuming one stripe per unique color.
+     * Generate horizontally striped model assuming one stripe per unique color.
      *
-     * @param  imageHeight stripe height
-     * @param  imageWidth  stripe width
-     * @return             newRGB image
+     * @param  imageHeight Model height
+     * @param  imageWidth  Model width
+     * @return             newRGB model
      */
     private int[][][] generateHorizontalStripes(int imageHeight, int imageWidth) {
         Color[] colors = getRainbowColors();
@@ -325,7 +325,7 @@ public class ImageImpl implements Image {
         // Calculate the stripe thickness
         int stripeThickness = (int) Math.round((double) imageHeight / colorCount);
         // Generate each stripe one pixel thickness at a time until full stripe
-        // thickness is reached and assign each stripe to the image
+        // thickness is reached and assign each stripe to the model
         for (int h = 0; h < colorCount; h++) {
             int[] channelColors = {colors[h].getRed(),colors[h].getGreen(),colors[h].getBlue()};
             if (h < colorCount - 1) {
@@ -340,7 +340,7 @@ public class ImageImpl implements Image {
     }
 
     /**
-     * Iterate the paint brush down the image, pixel row by pixel row.
+     * Iterate the paint brush down the model, pixel row by pixel row.
      * 
      * @param imageWidth
      * @param newRgb
@@ -387,6 +387,13 @@ public class ImageImpl implements Image {
         setRGB(generateVerticalStripes(imageHeight, imageWidth));
     }
 
+    /**
+     * Generate vertically striped model assuming one stripe per unique color.
+     * 
+     * @param  imageHeight Model height
+     * @param  imageWidth  Model width
+     * @return             newRGB New model.
+     */
     private int[][][] generateVerticalStripes(int imageHeight, int imageWidth) {
         Color[] colors = getRainbowColors();
         int colorCount = colors.length;
@@ -420,12 +427,12 @@ public class ImageImpl implements Image {
      * colors.
      *
      * @param  squareWidth user-provided checkerboard square width
-     * @return             checkerboard image
+     * @return             checkerboard model
      */
     private int[][][] generateCheckerboard(int squareWidth) {
         Color[] colors = {Color.black,Color.white};
         int[] channels = new int[3]; // Will hold pixel's RGB channels
-        int imageWidth = 8 * squareWidth; // Image length since height and width
+        int imageWidth = 8 * squareWidth; // Model length since height and width
         int imageHeight = imageWidth;
 
         // Pixel colors represented by their integer rgb values
@@ -443,7 +450,7 @@ public class ImageImpl implements Image {
         boolean isColor0Active = true;
         channels = colorChannels[0];
 
-        // Populate the checkerboard image array with color channel values user-provided
+        // Populate the checkerboard model array with color channel values user-provided
         // square width by
         // user-provided square width, row by row, assuming NUM_ROWS_AND_COLS number of
         // rows and

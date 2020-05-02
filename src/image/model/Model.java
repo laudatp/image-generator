@@ -3,15 +3,15 @@ package image.model;
 import java.io.IOException;
 
 /**
- * Represents the image.model for the image processing application. This is post-class practice
+ * Represents the model.model for the model processing application. This is post-course practice.
  * 
  * @author  Peter Laudat
  * @version 5/19/2019
  */
-public interface Image {
+public interface Model {
 
     /**
-     * Loads this image from a file.
+     * Loads this model from a file.
      * 
      * @param  imageInfile
      * @throws IOException
@@ -19,7 +19,7 @@ public interface Image {
     void load(String imageInfile) throws IOException;
 
     /**
-     * Saves this image to a file.
+     * Saves this model to a file.
      * 
      * @param  imageOutfile
      * @throws IOException
@@ -27,22 +27,22 @@ public interface Image {
     void save(String imageOutfile) throws IOException;
 
     /**
-     * Blur this image.
+     * Blur this model.
      */
     void blur();
 
     /**
-     * Sharpen this image.
+     * Sharpen this model.
      */
     void sharpen();
 
     /**
-     * Grayscale this image.
+     * Grayscale this model.
      */
     void grayscale();
 
     /**
-     * Sepia this image.
+     * Sepia this model.
      */
     void sepia();
 

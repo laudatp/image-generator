@@ -6,9 +6,9 @@ package image.archive;
 import java.awt.Color;
 
 /**
- * Generate checkerboard patterned image.
+ * Generate checkerboard patterned model.
  *
- * @param width this image's checkerboard squares' length
+ * @param width this model's checkerboard squares' length
  */
 public class Checkerboard {
   private static final Color[] COLORS = {Color.black,Color.white};
@@ -27,12 +27,12 @@ public class Checkerboard {
    * colors.
    *
    * @param  squareWidth user-provided checkerboard square width
-   * @return             checkerboard image
+   * @return             checkerboard model
    */
   private int[][][] generateCheckerboard(int squareWidth) {
 
     int[] channels = new int[3]; // Will hold pixel's RGB channels
-    int imageWidth = 8 * squareWidth; // Image length since height and width
+    int imageWidth = 8 * squareWidth; // Model length since height and width
     int imageHeight = imageWidth;
 
     // Pixel colors represented by their integer rgb values
@@ -50,7 +50,7 @@ public class Checkerboard {
     boolean isColor0Active = true;
     channels = colorChannels[0];
 
-    // Populate the checkerboard image array with color channel values user-provided square width by
+    // Populate the checkerboard model array with color channel values user-provided square width by
     // user-provided square width, row by row, assuming NUM_ROWS_AND_COLS number of rows and
     // columns.
     int numberOfSquaresPerRowOrColumn = 8;

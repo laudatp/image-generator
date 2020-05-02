@@ -6,75 +6,77 @@ package image.controller;
 import java.io.IOException;
 import java.util.Scanner;
 
-import image.model.Image;
+import image.model.Model;
+import image.view.Features;
 
 /**
- * Implements image controller functions.
+ * Implements model controller functions.
  * 
  * @author Peter
  *
  */
-public class ImageControllerImpl implements ImageController {
+public class BatchControllerImpl implements Controller, Features {
 
     /** Filename extension. */
     private static final String FILE_EXT = ".jpg";
 
     /** The input source. */
+
+    /** Input file or line. */
     private final Readable in;
 
-    public ImageControllerImpl(Readable in) {
+    public BatchControllerImpl(Readable in) {
         this.in = in;
     }
 
     @Override
-    public void go(Image image) throws IOException {
-        String line = "";
-        String imageCommand = "";
+    public void go(Model model) throws IOException {
         try (Scanner sc = new Scanner(this.in)) {
             while (sc.hasNextLine()) {
                 // read a line
-                line = sc.nextLine().toLowerCase();
-                // parse the tokens in the line
+                String line = readLine(sc);
+                // parse the tokens in the line. The first token is the command, which signals the tokens that
+                // follow.
                 try (Scanner tokens = new Scanner(line)) {
                     while (tokens.hasNext()) {
                         // parse the line into tokens
-                        imageCommand = tokens.next();
+                        String imageCommand = tokens.next();
                         switch (imageCommand) {
                             case "load":
-                                loadCommandFile(image, tokens);
+                                loadCommandFile(model, tokens);
                                 break;
                             case "save":
-                                writeImageFile(image, tokens);
+                                writeModelFile(model, tokens);
                                 break;
                             case "drawhorizontalrainbowstripes":
-                                drawHorizontalRainbowStripes(image, tokens);
+                                drawHorizontalRainbowStripes(model, tokens);
                                 break;
                             case "drawverticalrainbowstripes":
-                                drawVerticalRainbowStripes(image, tokens);
+                                drawVerticalRainbowStripes(model, tokens);
                                 break;
                             case "drawcheckerboard":
-                                drawCheckerBoard(image, tokens);
+                                drawCheckerBoard(model, tokens);
                                 break;
                             case "drawfranceflag":
-                                drawFranceFlag(image, tokens);
+                                drawFranceFlag(model, tokens);
                                 break;
                             case "drawswitzerlandflag":
-                                drawSwitzerlandFlag(image, tokens);
+                                drawSwitzerlandFlag(model, tokens);
                                 break;
                             case "drawgreeceflag":
-                                drawGreeceFlag(image, tokens);
+                                drawGreeceFlag(model, tokens);
                                 break;
                             case "blur":
-                                blur(image);
+                                blur(model);
                                 break;
                             case "sharpen":
-                                sharpen(image);
+                                sharpen(model);
                                 break;
                             case "grayscale":
-                                grayscale(image);
+                                grayscale(model);
                                 break;
                             case "sepia":
-                                sepia(image);
+                                sepia(model);
                                 break;
                             case "quit":
                                 System.out.println("Quitting program");
@@ -90,133 +92,143 @@ public class ImageControllerImpl implements ImageController {
     }
 
     /**
-     * Sepia filter the image.
+     * Read a line from a file.
      * 
-     * @param image
+     * @param  sc
+     * @return    the line
      */
-    private void sepia(Image image) {
-        image.sepia();
+    private String readLine(Scanner sc) {
+        return sc.nextLine().toLowerCase();
     }
 
     /**
-     * Grayscale filter the image.
+     * Sepia filter the model.
      * 
-     * @param image
+     * @param model
      */
-    private void grayscale(Image image) {
-        image.grayscale();
+    private void sepia(Model model) {
+        model.sepia();
     }
 
     /**
-     * Sharpen the image.
+     * Grayscale filter the model.
      * 
-     * @param image
+     * @param model
      */
-    private void sharpen(Image image) {
-        image.sharpen();
+    private void grayscale(Model model) {
+        model.grayscale();
     }
 
     /**
-     * Blur the image.
+     * Sharpen the model.
      * 
-     * @param image
+     * @param model
      */
-    private void blur(Image image) {
-        image.blur();
+    private void sharpen(Model model) {
+        model.sharpen();
+    }
+
+    /**
+     * Blur the model.
+     * 
+     * @param model
+     */
+    private void blur(Model model) {
+        model.blur();
     }
 
     /**
      * Draw Greece's flag.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawGreeceFlag(Image image, Scanner tokens) {
+    private void drawGreeceFlag(Model model, Scanner tokens) {
         int imageWidth = tokens.nextInt();
-        image.drawGreeceFlag(imageWidth);
+        model.drawGreeceFlag(imageWidth);
     }
 
     /**
      * Draw Switzerland's flag.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawSwitzerlandFlag(Image image, Scanner tokens) {
+    private void drawSwitzerlandFlag(Model model, Scanner tokens) {
         int imageWidth = tokens.nextInt();
-        image.drawSwitzerlandFlag(imageWidth);
+        model.drawSwitzerlandFlag(imageWidth);
     }
 
     /**
      * Draw France's flag.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawFranceFlag(Image image, Scanner tokens) {
+    private void drawFranceFlag(Model model, Scanner tokens) {
         int imageWidth = tokens.nextInt();
-        image.drawFranceFlag(imageWidth);
+        model.drawFranceFlag(imageWidth);
     }
 
     /**
      * Draw a checkerboard.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawCheckerBoard(Image image, Scanner tokens) {
+    private void drawCheckerBoard(Model model, Scanner tokens) {
         int cellWidth = tokens.nextInt();
-        image.drawCheckerBoard(cellWidth);
+        model.drawCheckerBoard(cellWidth);
     }
 
     /**
-     * Draw vertical rainbow striped image with given image height and width.
+     * Draw vertical rainbow striped model with given model height and width.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawVerticalRainbowStripes(Image image, Scanner tokens) {
+    private void drawVerticalRainbowStripes(Model model, Scanner tokens) {
         int imageHeight = tokens.nextInt();
         int imageWidth = tokens.nextInt();
-        image.drawVerticalRainbowStripes(imageHeight, imageWidth);
+        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
     }
 
     /**
-     * Draw horizontal rainbow striped image with given image height and width.
+     * Draw horizontal rainbow striped model with given model height and width.
      * 
-     * @param image
+     * @param model
      * @param tokens
      */
-    private void drawHorizontalRainbowStripes(Image image, Scanner tokens) {
+    private void drawHorizontalRainbowStripes(Model model, Scanner tokens) {
         int imageHeight = tokens.nextInt();
         int imageWidth = tokens.nextInt();
-        image.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+        model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
     }
 
     /**
-     * Write image to a file.
+     * Write model to a file.
      * 
-     * @param  image
+     * @param  model
      * @param  tokens
      * @throws IOException
      */
-    private void writeImageFile(Image image, Scanner tokens) throws IOException {
+    private void writeModelFile(Model model, Scanner tokens) throws IOException {
         String filename;
         filename = tokens.next() + FILE_EXT;
-        image.save(filename);
+        model.save(filename);
     }
 
     /**
-     * Load the file containing the image commands.
+     * Load the file containing the model commands.
      * 
-     * @param  image
+     * @param  model
      * @param  tokens
      * @throws IOException
      */
-    private void loadCommandFile(Image image, Scanner tokens) throws IOException {
+    private void loadCommandFile(Model model, Scanner tokens) throws IOException {
         String commandFile;
         commandFile = tokens.next() + FILE_EXT;
-        image.load(commandFile);
+        model.load(commandFile);
     }
 
 }
