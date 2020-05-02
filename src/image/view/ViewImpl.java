@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import image.controller.Features;
@@ -22,15 +24,24 @@ public class ViewImpl extends JFrame implements View {
      * System generated serial id.
      */
     private static final long serialVersionUID = -7293519515508019533L;
+
     /** Signal that file chooser should open file. */
     private static final String OPEN = "OPEN";
     /** Signal that chooser should save file. */
     private static final String SAVE = "SAVE";
 
+    /** Panel. */
+    private JPanel contentPanel;
     /** Menu bar. */
     private JMenuBar appMenuBar;
     /** Menu. */
     private JMenu fileMenu;
+    /** New file submenu. */
+    private JMenu newSubmenu;
+    /** Rainbow stripes submenu. */
+    private JMenu rainbowStripes;
+    /** New image file menu item. */
+    private JMenuItem horizontal;
     /** Open File file menu item. */
     private JMenuItem openFileMenuItem;
     /** Save File file menu item. */
@@ -47,17 +58,35 @@ public class ViewImpl extends JFrame implements View {
      */
     public ViewImpl(String caption) {
         super(caption);
-        // Container settings
+        // Set container
         this.setLayout(new BorderLayout());
         this.setSize(1000, 1000);
         this.setLocation(700, 300);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Top menu bar
+        // Create content panel that will overlay the JFrame content pane to allow the ability to take
+        // advantage of JComponent features
+        contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder());
+
+        // application menu bar
         appMenuBar = new JMenuBar();
 
         // File menu
         fileMenu = new JMenu("File");
+
+        // create and add New file menu item to File menu
+        newSubmenu = new JMenu("New");
+        fileMenu.add(newSubmenu);
+
+        // create and add rainbow stripes submenu new submenu
+        rainbowStripes = new JMenu("Rainbow Stripes");
+        newSubmenu.add(rainbowStripes);
+
+        // create and add horizontal menu item to rainbow stripes submenu
+        horizontal = new JMenuItem("Horizontal");
+        horizontal.setActionCommand("Horizontal");
+        rainbowStripes.add(horizontal);
 
         // create and add Open file file menu item to File menu
         openFileMenuItem = new JMenuItem("Open File...");
@@ -76,11 +105,18 @@ public class ViewImpl extends JFrame implements View {
 
         // add File menu to app menu bar
         appMenuBar.add(fileMenu);
-        // add the menu bar to the top panel of the border layout
-        this.getContentPane().add(appMenuBar, BorderLayout.PAGE_START);
+        // set the JFrame menu bar
+        this.setJMenuBar(appMenuBar);
 
+        // create the label which will display the image
         display = new JLabel();
-        this.getContentPane().add(display, BorderLayout.CENTER);
+        display.setHorizontalAlignment(JLabel.CENTER);
+        display.setVerticalAlignment(JLabel.CENTER);
+        // add the label to the center panel of the contentPanel border layout
+        contentPanel.add(display, BorderLayout.CENTER);
+
+        // make the content panel the content pane
+        this.setContentPane(contentPanel);
 
         this.setVisible(true);
 
