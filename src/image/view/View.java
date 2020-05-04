@@ -1,5 +1,7 @@
 package image.view;
 
+import java.awt.Image;
+
 import image.controller.Features;
 
 public interface View {
@@ -12,6 +14,8 @@ public interface View {
      */
     void setFeatures(Features f);
 
-    void updateDisplay(String imageInfile);
+    void updateDisplay(String inFile);
+
+    void updateDisplay(Image image);
 
 }

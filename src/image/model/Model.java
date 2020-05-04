@@ -1,5 +1,6 @@
 package image.model;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -57,5 +58,7 @@ public interface Model {
     void drawSwitzerlandFlag(int flagWidth);
 
     void drawGreeceFlag(int flagWidth);
+
+    BufferedImage getImage();
 
 }

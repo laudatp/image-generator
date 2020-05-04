@@ -2,12 +2,15 @@ package image.view;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import image.controller.Features;
@@ -50,6 +54,18 @@ public class ViewImpl extends JFrame implements View {
     private JMenuItem quitFileMenuItem;
     /** Image display. */
     private JLabel display;
+    /** Blur button. */
+    private JButton blurButton;
+    /** Blur button. */
+    private JButton sharpenButton;
+    /** Blur button. */
+    private JButton grayscaleButton;
+    /** Blur button. */
+    private JButton sepiaButton;
+    /** Button group. */
+    private ButtonGroup buttonGroup;
+    /** Button toolbar. */
+    private JToolBar toolbar;
 
     /**
      * ViewImpl Constructor.
@@ -85,22 +101,22 @@ public class ViewImpl extends JFrame implements View {
 
         // create and add horizontal menu item to rainbow stripes submenu
         horizontal = new JMenuItem("Horizontal");
-        horizontal.setActionCommand("Horizontal");
+        horizontal.setActionCommand("Horizontal Menu Item");
         rainbowStripes.add(horizontal);
 
         // create and add Open file file menu item to File menu
         openFileMenuItem = new JMenuItem("Open File...");
-        openFileMenuItem.setActionCommand("Open File");
+        openFileMenuItem.setActionCommand("Open File Menu Item");
         fileMenu.add(openFileMenuItem);
 
         // create and add Save to file file menu item to File menu
         saveFileMenuItem = new JMenuItem("Save to File...");
-        saveFileMenuItem.setActionCommand("Save to File");
+        saveFileMenuItem.setActionCommand("Save to File Menu Item");
         fileMenu.add(saveFileMenuItem);
 
         // create and add Quit file menu item to File menu
         quitFileMenuItem = new JMenuItem("Quit");
-        quitFileMenuItem.setActionCommand("Quit");
+        quitFileMenuItem.setActionCommand("Quit Menu Item");
         fileMenu.add(quitFileMenuItem);
 
         // add File menu to app menu bar
@@ -118,6 +134,42 @@ public class ViewImpl extends JFrame implements View {
         // make the content panel the content pane
         this.setContentPane(contentPanel);
 
+        // create and add the blur button to the left hand borde
+        blurButton = new JButton("Blur");
+        blurButton.setVisible(false);
+        blurButton.setActionCommand("Blur Button");
+
+        // create and add the sharpen button to the border line start
+        sharpenButton = new JButton("Sharpen");
+        sharpenButton.setVisible(false);
+        sharpenButton.setActionCommand("Sharpen Button");
+
+        // create and add the grayscale button to the border line start
+        grayscaleButton = new JButton("Grayscale");
+        grayscaleButton.setVisible(false);
+        grayscaleButton.setActionCommand("Grayscale Button");
+
+        // create and add the sepia button to the border line start
+        sepiaButton = new JButton("Sepia");
+        sepiaButton.setVisible(false);
+        sepiaButton.setActionCommand("Sepia Button");
+
+        // create button group and add the buttons to the group
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(blurButton);
+        buttonGroup.add(sharpenButton);
+        buttonGroup.add(grayscaleButton);
+        buttonGroup.add(sepiaButton);
+        buttonGroup.clearSelection();
+
+        // create toolbar and add the buttons to the toolbar
+        toolbar = new JToolBar(JToolBar.HORIZONTAL);
+        toolbar.add(blurButton);
+        toolbar.add(sharpenButton);
+        toolbar.add(grayscaleButton);
+        toolbar.add(sepiaButton);
+
+        contentPanel.add(toolbar, BorderLayout.PAGE_END);
         this.setVisible(true);
 
     }
@@ -131,9 +183,16 @@ public class ViewImpl extends JFrame implements View {
     @Override
     public void setFeatures(Features f) {
 
+        horizontal.addActionListener(l -> f.drawHorizontalRainbowStripes(imageHeight, imageWidth););
+        blurButton.addActionListener(l -> f.blur());
+        sharpenButton.addActionListener(l -> f.sharpen());
+        grayscaleButton.addActionListener(l -> f.grayscale());
+        sepiaButton.addActionListener(l -> f.sepia());
+
         openFileMenuItem.addActionListener(l -> {
             try {
                 f.load(chooseFile(OPEN));
+                makeButtonsVisible(true);
             } catch (HeadlessException | IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -193,8 +252,22 @@ public class ViewImpl extends JFrame implements View {
         }
     }
 
+    @Override
+    public void updateDisplay(Image image) {
+        ImageIcon imageIcon = new ImageIcon(image);
+        display.setIcon(imageIcon);
+        display.repaint();
+    }
+
     public void resetFocus() {
         setFocusable(true);
         requestFocus();
+    }
+
+    private void makeButtonsVisible(boolean v) {
+        blurButton.setVisible(v);
+        sharpenButton.setVisible(v);
+        grayscaleButton.setVisible(v);
+        sepiaButton.setVisible(v);
     }
 }
