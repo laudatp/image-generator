@@ -70,32 +70,38 @@ public class ViewImpl extends JFrame implements View {
     /** Button toolbar. */
     private JToolBar toolbar;
     /** Rainbow stripes image height label for text field. */
-    private JLabel rainbowStripesHeightLabel;
+    private JLabel imageHeightLabel;
     /** Rainbow stripes image width label for text field. */
-    private JLabel rainbowStripesWidthLabel;
+    private JLabel imageWidthLabel;
     /** Rainbow stripes image height text field. */
-    private JTextField rainbowStripesHeightField;
+    private JTextField imageHeightField;
     /** Rainbow stripes image height text field. */
-    private JTextField rainbowStripesWidthField;
-    /** Pane containing rainbow stripes labels. */
-    private JPanel rainbowStripesLabelPane;
-    /** Pane containing rainbow stripes fields. */
-    private JPanel rainbowStripesFieldPane;
-    /** Pane containing rainbow stripes submit button. */
-    private JPanel rainbowStripesSubmitPane;
-    /** Rainbow stripes submit button. */
-    private JButton rainbowStripesSubmitButton;
-    /** Pane containing labels, fields, and submit button for rainbow stripes image definition. */
-    private JPanel rainbowStripesDimsPane;
+    private JTextField imageWidthField;
+    /** Pane containing image height label and text field. */
+    private JPanel imageHeightDimensionPane;
+    /** Pane containing image width label and text field. */
+    private JPanel imageWidthDimensionPane;
+    /** Pane containing image dimensions submit button. */
+    private JPanel imageDimensionsSubmitPane;
+    /** Image dimensions submit button. */
+    private JButton imageDimensionsSubmitButton;
+    /** Pane containing labels, fields, and submit button for image dimensions submission. */
+    private JPanel imageDimensionsPane;
     /** Vertical rainbow stripes menu item. */
     private JMenuItem verticalRainbowStripesMenuItem;
     /** Enable multiple uses for same button by tracking user-selected feature. */
-    private String featureFlag;
+    private String imageType;
+    /** Flags submenu. */
     private JMenu flags;
+    /** French flag menu item. */
     private JMenuItem franceFlagMenuItem;
+    /** Swiss flag menu item. */
     private JMenuItem switzerlandFlagMenuItem;
+    /** Greek flag menu item. */
     private JMenuItem greeceFlagMenuItem;
+    /** Checkerboard submenu. */
     private JMenu checkerboard;
+    /** Checkerboard menu item. */
     private JMenuItem checkerboardMenuItem;
 
     /**
@@ -111,8 +117,8 @@ public class ViewImpl extends JFrame implements View {
         this.setLocation(700, 300);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Create content panel that will overlay the JFrame content pane to allow the ability to take
-        // advantage of JComponent features
+        // Create content panel that will overlay the JFrame content pane to
+        // take advantage of JComponent features
         contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder());
 
@@ -120,7 +126,7 @@ public class ViewImpl extends JFrame implements View {
         appMenuBar = new JMenuBar();
 
         // File menu
-        fileMenu = new JMenu("File");
+        fileMenu = new JMenu("Image");
 
         // create and add New file menu item to File menu
         newSubmenu = new JMenu("New");
@@ -140,59 +146,56 @@ public class ViewImpl extends JFrame implements View {
         verticalRainbowStripesMenuItem.setActionCommand("Vertical Rainbow Stripes Menu Item");
         rainbowStripes.add(verticalRainbowStripesMenuItem);
 
-        // Create the horizontal rainbow stripes image height and width labels.
-        rainbowStripesHeightLabel = new JLabel(HEIGHT_STRING);
-        rainbowStripesWidthLabel = new JLabel(WIDTH_STRING);
+        // Create the image height and width labels.
+        imageHeightLabel = new JLabel(HEIGHT_STRING);
+        imageWidthLabel = new JLabel(WIDTH_STRING);
 
-        // Create the horizontal and vertical rainbow stripes height and width text fields and set them up
-        rainbowStripesHeightField = new JTextField(10);
-        rainbowStripesHeightField.setActionCommand("Rainbow Stripes Height Field");
+        // Create the image height and width text fields and set them up
+        imageHeightField = new JTextField(10);
+        imageHeightField.setActionCommand("Image Height Field");
+        imageWidthField = new JTextField(10);
+        imageWidthField.setActionCommand("Image Width Field");
 
-        rainbowStripesWidthField = new JTextField(10);
-        rainbowStripesWidthField.setActionCommand("Rainbow Stripes Width Field");
+        // Tell accessibility tools about the image label/text field pairs
+        imageHeightLabel.setLabelFor(imageHeightField);
+        imageWidthLabel.setLabelFor(imageWidthField);
 
-        // Tell accessibility tools about horizontal rainbow stripes label/textfield pairs
-        rainbowStripesHeightLabel.setLabelFor(rainbowStripesHeightField);
-        rainbowStripesWidthLabel.setLabelFor(rainbowStripesWidthField);
+        // Lay out the image height dimensions pane
+        imageHeightDimensionPane = new JPanel(new GridLayout(0, 1));
+        imageHeightDimensionPane.add(imageHeightLabel);
+        imageHeightDimensionPane.add(imageHeightField);
 
-        // Lay out the horizontal rainbow stripes labels in a panel
-        rainbowStripesLabelPane = new JPanel(new GridLayout(0, 1));
+        // Lay out the image width dimensions pane
+        imageWidthDimensionPane = new JPanel(new GridLayout(0, 1));
+        imageWidthDimensionPane.add(imageWidthLabel);
+        imageWidthDimensionPane.add(imageWidthField);
 
-        rainbowStripesLabelPane.add(rainbowStripesHeightLabel);
-        rainbowStripesLabelPane.add(rainbowStripesHeightField);
+        // Lay out out the image dimensions submit button pane
+        imageDimensionsSubmitPane = new JPanel(new FlowLayout());
+        imageDimensionsSubmitButton = new JButton("Submit");
+        imageDimensionsSubmitButton.setActionCommand("Submit Rainbow Stripes Image Dimensions");
+        imageDimensionsSubmitPane.add(imageDimensionsSubmitButton);
 
-        // Lay out the horizontal rainbow stripes text fields in a panel
-        rainbowStripesFieldPane = new JPanel(new GridLayout(0, 1));
-        rainbowStripesFieldPane.add(rainbowStripesWidthLabel);
-        rainbowStripesFieldPane.add(rainbowStripesWidthField);
+        // Lay out the image dimensions pane composed of height, width, and submit panes
+        imageDimensionsPane = new JPanel(new FlowLayout());
+        imageDimensionsPane.add(imageHeightDimensionPane);
+        imageDimensionsPane.add(imageWidthDimensionPane);
+        imageDimensionsPane.add(imageDimensionsSubmitPane);
+        imageDimensionsPane.setVisible(false);
 
-        // Layout out the horizontal rainbow stripes submit button in horizontal rainbow stripes panel
-        rainbowStripesSubmitPane = new JPanel(new FlowLayout());
-        rainbowStripesSubmitButton = new JButton("Submit");
-        rainbowStripesSubmitButton.setActionCommand("Submit Rainbow Stripes Image Dimensions");
-        rainbowStripesSubmitPane.add(rainbowStripesSubmitButton);
-
-        // Lay out the horizontal rainbow stripes labels and text field panels in a single horizontal
-        // rainbow stripes panel.
-        rainbowStripesDimsPane = new JPanel(new FlowLayout());
-        rainbowStripesDimsPane.add(rainbowStripesLabelPane);
-        rainbowStripesDimsPane.add(rainbowStripesFieldPane);
-        rainbowStripesDimsPane.add(rainbowStripesSubmitPane);
-        rainbowStripesDimsPane.setVisible(false);
-
-        // Add the complete rainbow stripes dimensions pane to the content panel
-        contentPanel.add(rainbowStripesDimsPane, BorderLayout.PAGE_START);
+        // Add the complete image dimensions pane to the content panel
+        contentPanel.add(imageDimensionsPane, BorderLayout.PAGE_START);
 
         // create and add flags submenu
         flags = new JMenu("Flags");
         newSubmenu.add(flags);
 
-        // create and add french flag menu item to flags submenu
+        // create and add French flag menu item to flags submenu
         franceFlagMenuItem = new JMenuItem("France");
         franceFlagMenuItem.setActionCommand("France Flag Menu Item");
         flags.add(franceFlagMenuItem);
 
-        // create and add swiss flag menu item to flags submenu
+        // create and add Swiss flag menu item to flags submenu
         switzerlandFlagMenuItem = new JMenuItem("Switzerland");
         switzerlandFlagMenuItem.setActionCommand("Switzerland Flag Menu Item");
         flags.add(switzerlandFlagMenuItem);
@@ -206,7 +209,7 @@ public class ViewImpl extends JFrame implements View {
         checkerboard = new JMenu("Checkerboard");
         newSubmenu.add(checkerboard);
 
-        // create and add french flag menu item to flags submenu
+        // create and add checkerboard menu item to checkerboard submenu
         checkerboardMenuItem = new JMenuItem("Checkerboard");
         checkerboardMenuItem.setActionCommand("Checkerboard Menu Item");
         checkerboard.add(checkerboardMenuItem);
@@ -291,90 +294,96 @@ public class ViewImpl extends JFrame implements View {
     @Override
     public void setFeatures(Features f) {
 
+        // Listen for horizontal rainbow stripes menu item and set menu accordingly
         horizontalRainbowStripesMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(true);
-            rainbowStripesHeightField.setVisible(true);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("horizontalRainbowStripes");
+            imageHeightLabel.setVisible(true);
+            imageHeightField.setVisible(true);
+            imageDimensionsPane.setVisible(true);
+            setImageType("horizontalRainbowStripes");
             validate();
         });
 
+        // Listen for vertical rainbow stripes menu item and set menu accordingly
         verticalRainbowStripesMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(true);
-            rainbowStripesHeightField.setVisible(true);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("verticalRainbowStripes");//
+            imageHeightLabel.setVisible(true);
+            imageHeightField.setVisible(true);
+            imageDimensionsPane.setVisible(true);
+            setImageType("verticalRainbowStripes");//
             validate();
         });
 
+        // Listen for france flag menu item and set menu accordingly
         franceFlagMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(false);
-            rainbowStripesHeightField.setVisible(false);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("franceFlag");
+            imageHeightLabel.setVisible(false);
+            imageHeightField.setVisible(false);
+            imageDimensionsPane.setVisible(true);
+            setImageType("franceFlag");
             validate();
         });
 
+        // Listen for switzerland flag menu item and set menu accordingly
         switzerlandFlagMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(false);
-            rainbowStripesHeightField.setVisible(false);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("switzerlandFlag");
+            imageHeightLabel.setVisible(false);
+            imageHeightField.setVisible(false);
+            imageDimensionsPane.setVisible(true);
+            setImageType("switzerlandFlag");
             validate();
         });
 
+        // Listen for greece flag menu item and set menu accordingly
         greeceFlagMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(false);
-            rainbowStripesHeightField.setVisible(false);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("greeceFlag");
+            imageHeightLabel.setVisible(false);
+            imageHeightField.setVisible(false);
+            imageDimensionsPane.setVisible(true);
+            setImageType("greeceFlag");
             validate();
         });
 
+        // Listen for checkerboard menu item and set menu accordingly
         checkerboardMenuItem.addActionListener(l -> {
-            rainbowStripesHeightLabel.setVisible(false);
-            rainbowStripesHeightField.setVisible(false);
-            rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("checkerboard");
+            imageHeightLabel.setVisible(false);
+            imageHeightField.setVisible(false);
+            imageDimensionsPane.setVisible(true);
+            setImageType("checkerboard");
             validate();
         });
 
-        // Draw horizontal or vertical rainbow stripe image when submit button is pressed
-        rainbowStripesSubmitButton.addActionListener(l -> {
-            int width = Integer.parseInt(rainbowStripesWidthField.getText());
-            if (getFeatureFlag().equals("horizontalRainbowStripes")) {
-                int height = Integer.parseInt(rainbowStripesHeightField.getText());
+        // Submit user-selected image and user-entered dimensions to the controller
+        imageDimensionsSubmitButton.addActionListener(l -> {
+            int width = Integer.parseInt(imageWidthField.getText());
+            if (getImageType().equals("horizontalRainbowStripes")) {
+                int height = Integer.parseInt(imageHeightField.getText());
                 try {
                     f.drawHorizontalRainbowStripes(height, width);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } else if (getFeatureFlag().equals("verticalRainbowStripes")) {
-                int height = Integer.parseInt(rainbowStripesHeightField.getText());
+            } else if (getImageType().equals("verticalRainbowStripes")) {
+                int height = Integer.parseInt(imageHeightField.getText());
                 try {
                     f.drawVerticalRainbowStripes(height, width);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } else if (getFeatureFlag().equals("franceFlag")) {
+            } else if (getImageType().equals("franceFlag")) {
                 try {
                     f.drawFranceFlag(width);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } else if (getFeatureFlag().equals("switzerlandFlag")) {
+            } else if (getImageType().equals("switzerlandFlag")) {
                 try {
                     f.drawSwitzerlandFlag(width);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } else if (getFeatureFlag().equals("greeceFlag")) {
+            } else if (getImageType().equals("greeceFlag")) {
                 try {
                     f.drawGreeceFlag(width);
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-            } else if (getFeatureFlag().equals("checkerboard")) {
+            } else if (getImageType().equals("checkerboard")) {
                 try {
                     f.drawCheckerboard(width);
                 } catch (NumberFormatException e) {
@@ -383,11 +392,16 @@ public class ViewImpl extends JFrame implements View {
             }
         });
 
+        // Blur the current image
         blurButton.addActionListener(l -> f.blur());
+        // Sharpen the current image
         sharpenButton.addActionListener(l -> f.sharpen());
+        // Grayscale the current image
         grayscaleButton.addActionListener(l -> f.grayscale());
+        // Sepia the current image
         sepiaButton.addActionListener(l -> f.sepia());
 
+        // Open image file
         openFileMenuItem.addActionListener(l -> {
             try {
                 f.load(chooseFile(OPEN));
@@ -397,6 +411,7 @@ public class ViewImpl extends JFrame implements View {
             }
         });
 
+        // Save image to file
         saveFileMenuItem.addActionListener(l -> {
             try {
                 f.save(chooseFile(SAVE));
@@ -410,14 +425,17 @@ public class ViewImpl extends JFrame implements View {
 
     }
 
-    private String getFeatureFlag() {
-        return this.featureFlag;
+    // return the image type
+    private String getImageType() {
+        return this.imageType;
     }
 
-    private void setFeatureFlag(String feature) {
-        this.featureFlag = feature;
+    // Set the image type
+    private void setImageType(String image) {
+        this.imageType = image;
     }
 
+    //
     private String chooseFile(String chooserType) {
         // create and add a load file chooser
         JFileChooser chooser = new JFileChooser();
