@@ -23,7 +23,6 @@ public class ControllerImpl implements Features {
         this.model = new ModelImpl();
     }
 
-    @Override
     public void setView(View view) {
         this.view = view;
         view.setFeatures(this);
@@ -49,13 +48,6 @@ public class ControllerImpl implements Features {
     @Override
     public void blur() {
         model.blur();
-        updateDisplay();
-    }
-
-    /**
-     * Update the display.
-     */
-    private void updateDisplay() {
         BufferedImage image = model.getImage();
         view.updateDisplay(image);
     }
@@ -63,33 +55,37 @@ public class ControllerImpl implements Features {
     @Override
     public void sharpen() {
         model.sharpen();
-        updateDisplay();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
     }
 
     @Override
     public void grayscale() {
         model.grayscale();
-        updateDisplay();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
     }
 
     @Override
     public void sepia() {
         model.sepia();
-        updateDisplay();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
     }
 
     @Override
     public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
         model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
-        updateDisplay();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
     }
 
-    @Override
-    public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
-        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
-        updateDisplay();
-    }
-
+    // @Override
+    // public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
+    // // TODO Auto-generated method stub
+    //
+    // }
+    //
     // @Override
     // public void drawCheckerBoard(int cellWidth) {
     // // TODO Auto-generated method stub
@@ -120,12 +116,6 @@ public class ControllerImpl implements Features {
     @Override
     public void exitProgram() {
         System.exit(0);
-    }
-
-    @Override
-    public void setHeight(int height) {
-        // TODO Auto-generated method stub
-
     }
 
 }

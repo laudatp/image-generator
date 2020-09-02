@@ -2,8 +2,6 @@ package image.controller;
 
 import java.io.IOException;
 
-import image.view.View;
-
 /**
  * Represents the model.model for the model processing application. This is post-course practice.
  * 
@@ -48,8 +46,6 @@ public interface Features {
      */
     void sepia();
 
-    void setHeight(int height);
-
     void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
 
     void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
@@ -60,7 +56,5 @@ public interface Features {
     // void drawGreeceFlag(int flagWidth);
     void exitProgram();
     // void go(Model model) throws IOException;
-
-    void setView(View view);
 
 }
