@@ -50,11 +50,16 @@ public interface Features {
 
     void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
 
-    // void drawCheckerBoard(int cellWidth);
-    // void drawFranceFlag(int flagWidth);
-    // void drawSwitzerlandFlag(int flagWidth);
-    // void drawGreeceFlag(int flagWidth);
+    void drawCheckerboard(int cellWidth);
+
+    void drawFranceFlag(int flagWidth);
+
+    void drawSwitzerlandFlag(int flagWidth);
+
+    void drawGreeceFlag(int flagWidth);
+
     void exitProgram();
+
     // void go(Model model) throws IOException;
 
 }

@@ -178,7 +178,7 @@ public class BatchControllerImpl implements Controller, Features {
      */
     private void drawCheckerBoard(Model model, Scanner tokens) {
         int cellWidth = tokens.nextInt();
-        model.drawCheckerBoard(cellWidth);
+        model.drawCheckerboard(cellWidth);
     }
 
     /**
