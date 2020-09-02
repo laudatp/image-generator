@@ -45,7 +45,7 @@ public class ViewImpl extends JFrame implements View {
     /** Rainbow stripes submenu. */
     private JMenu rainbowStripes;
     /** New image file menu item. */
-    private JMenuItem horizontal;
+    private JMenuItem horizontalRainbowStripesMenuItem;
     /** Open File file menu item. */
     private JMenuItem openFileMenuItem;
     /** Save File file menu item. */
@@ -99,10 +99,13 @@ public class ViewImpl extends JFrame implements View {
         rainbowStripes = new JMenu("Rainbow Stripes");
         newSubmenu.add(rainbowStripes);
 
-        // create and add horizontal menu item to rainbow stripes submenu
-        horizontal = new JMenuItem("Horizontal");
-        horizontal.setActionCommand("Horizontal Menu Item");
-        rainbowStripes.add(horizontal);
+        // create and add horizontalRainbowStripesMenuItem menu item to rainbow stripes submenu
+        horizontalRainbowStripesMenuItem = new JMenuItem("Horizontal");
+        horizontalRainbowStripesMenuItem.setActionCommand("Horizontal Rainbow Stripes Menu Item");
+        rainbowStripes.add(horizontalRainbowStripesMenuItem);
+
+        // create and add rainbow stripes labels and text fields
+        horizontalRainbowStripesMenuItem
 
         // create and add Open file file menu item to File menu
         openFileMenuItem = new JMenuItem("Open File...");
@@ -183,7 +186,11 @@ public class ViewImpl extends JFrame implements View {
     @Override
     public void setFeatures(Features f) {
 
-        horizontal.addActionListener(l -> f.drawHorizontalRainbowStripes(imageHeight, imageWidth););
+        horizontalRainbowStripesMenuItem.addActionListener(l -> {
+
+            f.drawHorizontalRainbowStripes(500, 1000);
+
+        });
         blurButton.addActionListener(l -> f.blur());
         sharpenButton.addActionListener(l -> f.sharpen());
         grayscaleButton.addActionListener(l -> f.grayscale());
