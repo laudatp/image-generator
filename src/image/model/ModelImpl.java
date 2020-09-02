@@ -419,7 +419,7 @@ public class ModelImpl implements Model {
     }
 
     @Override
-    public void drawCheckerBoard(int cellWidth) {
+    public void drawCheckerboard(int cellWidth) {
         setRGB(generateCheckerboard(cellWidth));
     }
 

@@ -34,9 +34,9 @@ public class ViewImpl extends JFrame implements View {
     /** Signal that chooser should save file. */
     private static final String SAVE = "SAVE";
     /** String for height label. */
-    private static final String HEIGHT_STRING = "Height";
+    private static final String HEIGHT_STRING = "Image Height (pixels)";
     /** String for width label. */
-    private static final String WIDTH_STRING = "Width";
+    private static final String WIDTH_STRING = "Image Width (pixels)";
     /** Panel. */
     private JPanel contentPanel;
     /** Menu bar. */
@@ -87,14 +87,16 @@ public class ViewImpl extends JFrame implements View {
     private JButton rainbowStripesSubmitButton;
     /** Pane containing labels, fields, and submit button for rainbow stripes image definition. */
     private JPanel rainbowStripesDimsPane;
-    /** Image height. */
-    private int imageHeight;
-    /** Image width. */
-    private int imageWidth;
     /** Vertical rainbow stripes menu item. */
     private JMenuItem verticalRainbowStripesMenuItem;
     /** Enable multiple uses for same button by tracking user-selected feature. */
     private String featureFlag;
+    private JMenu flags;
+    private JMenuItem franceFlagMenuItem;
+    private JMenuItem switzerlandFlagMenuItem;
+    private JMenuItem greeceFlagMenuItem;
+    private JMenu checkerboard;
+    private JMenuItem checkerboardMenuItem;
 
     /**
      * ViewImpl Constructor.
@@ -124,7 +126,7 @@ public class ViewImpl extends JFrame implements View {
         newSubmenu = new JMenu("New");
         fileMenu.add(newSubmenu);
 
-        // create and add rainbow stripes submenu new submenu
+        // create and add rainbow stripes submenu
         rainbowStripes = new JMenu("Rainbow Stripes");
         newSubmenu.add(rainbowStripes);
 
@@ -181,6 +183,34 @@ public class ViewImpl extends JFrame implements View {
         // Add the complete rainbow stripes dimensions pane to the content panel
         contentPanel.add(rainbowStripesDimsPane, BorderLayout.PAGE_START);
 
+        // create and add flags submenu
+        flags = new JMenu("Flags");
+        newSubmenu.add(flags);
+
+        // create and add french flag menu item to flags submenu
+        franceFlagMenuItem = new JMenuItem("France");
+        franceFlagMenuItem.setActionCommand("France Flag Menu Item");
+        flags.add(franceFlagMenuItem);
+
+        // create and add swiss flag menu item to flags submenu
+        switzerlandFlagMenuItem = new JMenuItem("Switzerland");
+        switzerlandFlagMenuItem.setActionCommand("Switzerland Flag Menu Item");
+        flags.add(switzerlandFlagMenuItem);
+
+        // create and add Greek flag menu item to flags submenu
+        greeceFlagMenuItem = new JMenuItem("Greece");
+        greeceFlagMenuItem.setActionCommand("Greece Flag Menu Item");
+        flags.add(greeceFlagMenuItem);
+
+        // create and add checkerboard submenu
+        checkerboard = new JMenu("Checkerboard");
+        newSubmenu.add(checkerboard);
+
+        // create and add french flag menu item to flags submenu
+        checkerboardMenuItem = new JMenuItem("Checkerboard");
+        checkerboardMenuItem.setActionCommand("Checkerboard Menu Item");
+        checkerboard.add(checkerboardMenuItem);
+
         // create and add Open file file menu item to File menu
         openFileMenuItem = new JMenuItem("Open File...");
         openFileMenuItem.setActionCommand("Open File Menu Item");
@@ -213,22 +243,22 @@ public class ViewImpl extends JFrame implements View {
 
         // create and add the blur button to the left hand border
         blurButton = new JButton("Blur");
-        blurButton.setVisible(false);
+        blurButton.setVisible(true);
         blurButton.setActionCommand("Blur Button");
 
         // create and add the sharpen button to the border line start
         sharpenButton = new JButton("Sharpen");
-        sharpenButton.setVisible(false);
+        sharpenButton.setVisible(true);
         sharpenButton.setActionCommand("Sharpen Button");
 
         // create and add the grayscale button to the border line start
         grayscaleButton = new JButton("Grayscale");
-        grayscaleButton.setVisible(false);
+        grayscaleButton.setVisible(true);
         grayscaleButton.setActionCommand("Grayscale Button");
 
         // create and add the sepia button to the border line start
         sepiaButton = new JButton("Sepia");
-        sepiaButton.setVisible(false);
+        sepiaButton.setVisible(true);
         sepiaButton.setActionCommand("Sepia Button");
 
         // create button group and add the buttons to the group
@@ -247,6 +277,7 @@ public class ViewImpl extends JFrame implements View {
         toolbar.add(sepiaButton);
 
         contentPanel.add(toolbar, BorderLayout.PAGE_END);
+
         this.setVisible(true);
 
     }
@@ -261,29 +292,94 @@ public class ViewImpl extends JFrame implements View {
     public void setFeatures(Features f) {
 
         horizontalRainbowStripesMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(true);
+            rainbowStripesHeightField.setVisible(true);
             rainbowStripesDimsPane.setVisible(true);
             setFeatureFlag("horizontalRainbowStripes");
             validate();
         });
 
         verticalRainbowStripesMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(true);
+            rainbowStripesHeightField.setVisible(true);
             rainbowStripesDimsPane.setVisible(true);
-            setFeatureFlag("verticalRainbowStripes");
+            setFeatureFlag("verticalRainbowStripes");//
             validate();
         });
 
+        franceFlagMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(false);
+            rainbowStripesHeightField.setVisible(false);
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("franceFlag");
+            validate();
+        });
+
+        switzerlandFlagMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(false);
+            rainbowStripesHeightField.setVisible(false);
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("switzerlandFlag");
+            validate();
+        });
+
+        greeceFlagMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(false);
+            rainbowStripesHeightField.setVisible(false);
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("greeceFlag");
+            validate();
+        });
+
+        checkerboardMenuItem.addActionListener(l -> {
+            rainbowStripesHeightLabel.setVisible(false);
+            rainbowStripesHeightField.setVisible(false);
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("checkerboard");
+            validate();
+        });
+
+        // Draw horizontal or vertical rainbow stripe image when submit button is pressed
         rainbowStripesSubmitButton.addActionListener(l -> {
-            try {
+            int width = Integer.parseInt(rainbowStripesWidthField.getText());
+            if (getFeatureFlag().equals("horizontalRainbowStripes")) {
                 int height = Integer.parseInt(rainbowStripesHeightField.getText());
-                int width = Integer.parseInt(rainbowStripesWidthField.getText());
-                if (getFeatureFlag().equals("horizontalRainbowStripes")) {
-                    System.out.println("image height: " + height + " image width: " + width);
+                try {
                     f.drawHorizontalRainbowStripes(height, width);
-                } else if (getFeatureFlag().equals("verticalRainbowStripes")) {
-                    f.drawVerticalRainbowStripes(height, width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+            } else if (getFeatureFlag().equals("verticalRainbowStripes")) {
+                int height = Integer.parseInt(rainbowStripesHeightField.getText());
+                try {
+                    f.drawVerticalRainbowStripes(height, width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (getFeatureFlag().equals("franceFlag")) {
+                try {
+                    f.drawFranceFlag(width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (getFeatureFlag().equals("switzerlandFlag")) {
+                try {
+                    f.drawSwitzerlandFlag(width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (getFeatureFlag().equals("greeceFlag")) {
+                try {
+                    f.drawGreeceFlag(width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            } else if (getFeatureFlag().equals("checkerboard")) {
+                try {
+                    f.drawCheckerboard(width);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -320,22 +416,6 @@ public class ViewImpl extends JFrame implements View {
 
     private void setFeatureFlag(String feature) {
         this.featureFlag = feature;
-    }
-
-    private int getImageWidth() {
-        return this.imageWidth;
-    }
-
-    private int getImageHeight() {
-        return this.imageHeight;
-    }
-
-    private void setImageWidth(int width) {
-        this.imageWidth = width;
-    }
-
-    private void setImageHeight(int height) {
-        this.imageHeight = height;
     }
 
     private String chooseFile(String chooserType) {

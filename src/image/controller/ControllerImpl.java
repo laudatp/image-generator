@@ -87,29 +87,33 @@ public class ControllerImpl implements Features {
         view.updateDisplay(image);
     }
 
-    // @Override
-    // public void drawCheckerBoard(int cellWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void drawFranceFlag(int flagWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void drawSwitzerlandFlag(int flagWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void drawGreeceFlag(int flagWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
+    @Override
+    public void drawCheckerboard(int cellWidth) {
+        model.drawCheckerboard(cellWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void drawFranceFlag(int flagWidth) {
+        model.drawFranceFlag(flagWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void drawSwitzerlandFlag(int flagWidth) {
+        model.drawSwitzerlandFlag(flagWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void drawGreeceFlag(int flagWidth) {
+        model.drawGreeceFlag(flagWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
 
     /**
      * Exit program.

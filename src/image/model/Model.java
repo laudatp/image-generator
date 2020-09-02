@@ -51,7 +51,7 @@ public interface Model {
 
     void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
 
-    void drawCheckerBoard(int cellWidth);
+    void drawCheckerboard(int cellWidth);
 
     void drawFranceFlag(int flagWidth);
 
