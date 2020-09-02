@@ -1,5 +1,6 @@
 package image.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import image.model.Model;
@@ -44,42 +45,48 @@ public class ControllerImpl implements Features {
         model.save(imageOutfile);
     }
 
-    // @Override
-    // public void blur() {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void sharpen() {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void grayscale() {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void sepia() {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
-    // @Override
-    // public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
+    @Override
+    public void blur() {
+        model.blur();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void sharpen() {
+        model.sharpen();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void grayscale() {
+        model.grayscale();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void sepia() {
+        model.sepia();
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
+        model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
+    @Override
+    public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
+        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
     // @Override
     // public void drawCheckerBoard(int cellWidth) {
     // // TODO Auto-generated method stub

@@ -25,25 +25,31 @@ public interface Features {
      * @throws IOException
      */
     void save(String imageOutfile) throws IOException;
+
     /**
      * Blur this model.
      */
-    // void blur();
+    void blur();
+
     /**
      * Sharpen this model.
      */
-    // void sharpen();
+    void sharpen();
+
     /**
      * Grayscale this model.
      */
+    void grayscale();
 
-    // void grayscale();
     /**
      * Sepia this model.
      */
-    // void sepia();
-    // void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
-    // void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
+    void sepia();
+
+    void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
+
+    void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
+
     // void drawCheckerBoard(int cellWidth);
     // void drawFranceFlag(int flagWidth);
     // void drawSwitzerlandFlag(int flagWidth);
