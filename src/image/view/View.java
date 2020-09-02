@@ -18,4 +18,20 @@ public interface View {
 
     void updateDisplay(Image image);
 
+    int getImageHeight();
+
+    /**
+     * Set image height.
+     * 
+     * @param height
+     */
+    void setImageHeight(int height);
+
+    /**
+     * Return image width.
+     * 
+     * @return the width
+     */
+    int getImageWidth();
+
 }

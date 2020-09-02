@@ -8,7 +8,7 @@ import image.view.ViewImpl;
 
 public class CommandCallbacks {
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Model model = new ModelImpl();
         ControllerImpl controller = new ControllerImpl(model);
         View view = new ViewImpl("Image Viewer");
