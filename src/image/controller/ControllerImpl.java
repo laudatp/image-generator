@@ -80,12 +80,13 @@ public class ControllerImpl implements Features {
         view.updateDisplay(image);
     }
 
-    // @Override
-    // public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
-    // // TODO Auto-generated method stub
-    //
-    // }
-    //
+    @Override
+    public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
+        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
+        BufferedImage image = model.getImage();
+        view.updateDisplay(image);
+    }
+
     // @Override
     // public void drawCheckerBoard(int cellWidth) {
     // // TODO Auto-generated method stub

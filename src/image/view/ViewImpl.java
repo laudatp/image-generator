@@ -1,6 +1,8 @@
 package image.view;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
@@ -18,22 +20,23 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import image.controller.Features;
 
 public class ViewImpl extends JFrame implements View {
-    /**
-     * System generated serial id.
-     */
+    /** System generated serial id. */
     private static final long serialVersionUID = -7293519515508019533L;
-
     /** Signal that file chooser should open file. */
     private static final String OPEN = "OPEN";
     /** Signal that chooser should save file. */
     private static final String SAVE = "SAVE";
-
+    /** String for height label. */
+    private static final String HEIGHT_STRING = "Height";
+    /** String for width label. */
+    private static final String WIDTH_STRING = "Width";
     /** Panel. */
     private JPanel contentPanel;
     /** Menu bar. */
@@ -66,6 +69,32 @@ public class ViewImpl extends JFrame implements View {
     private ButtonGroup buttonGroup;
     /** Button toolbar. */
     private JToolBar toolbar;
+    /** Rainbow stripes image height label for text field. */
+    private JLabel rainbowStripesHeightLabel;
+    /** Rainbow stripes image width label for text field. */
+    private JLabel rainbowStripesWidthLabel;
+    /** Rainbow stripes image height text field. */
+    private JTextField rainbowStripesHeightField;
+    /** Rainbow stripes image height text field. */
+    private JTextField rainbowStripesWidthField;
+    /** Pane containing rainbow stripes labels. */
+    private JPanel rainbowStripesLabelPane;
+    /** Pane containing rainbow stripes fields. */
+    private JPanel rainbowStripesFieldPane;
+    /** Pane containing rainbow stripes submit button. */
+    private JPanel rainbowStripesSubmitPane;
+    /** Rainbow stripes submit button. */
+    private JButton rainbowStripesSubmitButton;
+    /** Pane containing labels, fields, and submit button for rainbow stripes image definition. */
+    private JPanel rainbowStripesDimsPane;
+    /** Image height. */
+    private int imageHeight;
+    /** Image width. */
+    private int imageWidth;
+    /** Vertical rainbow stripes menu item. */
+    private JMenuItem verticalRainbowStripesMenuItem;
+    /** Enable multiple uses for same button by tracking user-selected feature. */
+    private String featureFlag;
 
     /**
      * ViewImpl Constructor.
@@ -104,8 +133,53 @@ public class ViewImpl extends JFrame implements View {
         horizontalRainbowStripesMenuItem.setActionCommand("Horizontal Rainbow Stripes Menu Item");
         rainbowStripes.add(horizontalRainbowStripesMenuItem);
 
-        // create and add rainbow stripes labels and text fields
-        horizontalRainbowStripesMenuItem
+        // create and add verticalRainbowStripesMenuItem menu item to rainbow stripes submenu
+        verticalRainbowStripesMenuItem = new JMenuItem("Vertical");
+        verticalRainbowStripesMenuItem.setActionCommand("Vertical Rainbow Stripes Menu Item");
+        rainbowStripes.add(verticalRainbowStripesMenuItem);
+
+        // Create the horizontal rainbow stripes image height and width labels.
+        rainbowStripesHeightLabel = new JLabel(HEIGHT_STRING);
+        rainbowStripesWidthLabel = new JLabel(WIDTH_STRING);
+
+        // Create the horizontal and vertical rainbow stripes height and width text fields and set them up
+        rainbowStripesHeightField = new JTextField(10);
+        rainbowStripesHeightField.setActionCommand("Rainbow Stripes Height Field");
+
+        rainbowStripesWidthField = new JTextField(10);
+        rainbowStripesWidthField.setActionCommand("Rainbow Stripes Width Field");
+
+        // Tell accessibility tools about horizontal rainbow stripes label/textfield pairs
+        rainbowStripesHeightLabel.setLabelFor(rainbowStripesHeightField);
+        rainbowStripesWidthLabel.setLabelFor(rainbowStripesWidthField);
+
+        // Lay out the horizontal rainbow stripes labels in a panel
+        rainbowStripesLabelPane = new JPanel(new GridLayout(0, 1));
+
+        rainbowStripesLabelPane.add(rainbowStripesHeightLabel);
+        rainbowStripesLabelPane.add(rainbowStripesHeightField);
+
+        // Lay out the horizontal rainbow stripes text fields in a panel
+        rainbowStripesFieldPane = new JPanel(new GridLayout(0, 1));
+        rainbowStripesFieldPane.add(rainbowStripesWidthLabel);
+        rainbowStripesFieldPane.add(rainbowStripesWidthField);
+
+        // Layout out the horizontal rainbow stripes submit button in horizontal rainbow stripes panel
+        rainbowStripesSubmitPane = new JPanel(new FlowLayout());
+        rainbowStripesSubmitButton = new JButton("Submit");
+        rainbowStripesSubmitButton.setActionCommand("Submit Rainbow Stripes Image Dimensions");
+        rainbowStripesSubmitPane.add(rainbowStripesSubmitButton);
+
+        // Lay out the horizontal rainbow stripes labels and text field panels in a single horizontal
+        // rainbow stripes panel.
+        rainbowStripesDimsPane = new JPanel(new FlowLayout());
+        rainbowStripesDimsPane.add(rainbowStripesLabelPane);
+        rainbowStripesDimsPane.add(rainbowStripesFieldPane);
+        rainbowStripesDimsPane.add(rainbowStripesSubmitPane);
+        rainbowStripesDimsPane.setVisible(false);
+
+        // Add the complete rainbow stripes dimensions pane to the content panel
+        contentPanel.add(rainbowStripesDimsPane, BorderLayout.PAGE_START);
 
         // create and add Open file file menu item to File menu
         openFileMenuItem = new JMenuItem("Open File...");
@@ -137,7 +211,7 @@ public class ViewImpl extends JFrame implements View {
         // make the content panel the content pane
         this.setContentPane(contentPanel);
 
-        // create and add the blur button to the left hand borde
+        // create and add the blur button to the left hand border
         blurButton = new JButton("Blur");
         blurButton.setVisible(false);
         blurButton.setActionCommand("Blur Button");
@@ -187,10 +261,32 @@ public class ViewImpl extends JFrame implements View {
     public void setFeatures(Features f) {
 
         horizontalRainbowStripesMenuItem.addActionListener(l -> {
-
-            f.drawHorizontalRainbowStripes(500, 1000);
-
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("horizontalRainbowStripes");
+            validate();
         });
+
+        verticalRainbowStripesMenuItem.addActionListener(l -> {
+            rainbowStripesDimsPane.setVisible(true);
+            setFeatureFlag("verticalRainbowStripes");
+            validate();
+        });
+
+        rainbowStripesSubmitButton.addActionListener(l -> {
+            try {
+                int height = Integer.parseInt(rainbowStripesHeightField.getText());
+                int width = Integer.parseInt(rainbowStripesWidthField.getText());
+                if (getFeatureFlag().equals("horizontalRainbowStripes")) {
+                    System.out.println("image height: " + height + " image width: " + width);
+                    f.drawHorizontalRainbowStripes(height, width);
+                } else if (getFeatureFlag().equals("verticalRainbowStripes")) {
+                    f.drawVerticalRainbowStripes(height, width);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        });
+
         blurButton.addActionListener(l -> f.blur());
         sharpenButton.addActionListener(l -> f.sharpen());
         grayscaleButton.addActionListener(l -> f.grayscale());
@@ -201,7 +297,6 @@ public class ViewImpl extends JFrame implements View {
                 f.load(chooseFile(OPEN));
                 makeButtonsVisible(true);
             } catch (HeadlessException | IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
@@ -210,7 +305,6 @@ public class ViewImpl extends JFrame implements View {
             try {
                 f.save(chooseFile(SAVE));
             } catch (HeadlessException | IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         });
@@ -218,6 +312,30 @@ public class ViewImpl extends JFrame implements View {
         // exit program is tied to the exit button
         quitFileMenuItem.addActionListener(l -> f.exitProgram());
 
+    }
+
+    private String getFeatureFlag() {
+        return this.featureFlag;
+    }
+
+    private void setFeatureFlag(String feature) {
+        this.featureFlag = feature;
+    }
+
+    private int getImageWidth() {
+        return this.imageWidth;
+    }
+
+    private int getImageHeight() {
+        return this.imageHeight;
+    }
+
+    private void setImageWidth(int width) {
+        this.imageWidth = width;
+    }
+
+    private void setImageHeight(int height) {
+        this.imageHeight = height;
     }
 
     private String chooseFile(String chooserType) {
