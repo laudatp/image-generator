@@ -348,46 +348,55 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Submit user-selected image and user-entered dimensions to the controller
+        // Submit user-selected image type and user-entered dimensions to the controller
         imageDimensionsSubmitButton.addActionListener(l -> {
             int width = Integer.parseInt(imageWidthField.getText());
-            if (getImageType().equals("horizontalRainbowStripes")) {
-                int height = Integer.parseInt(imageHeightField.getText());
-                try {
-                    f.drawHorizontalRainbowStripes(height, width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            } else if (getImageType().equals("verticalRainbowStripes")) {
-                int height = Integer.parseInt(imageHeightField.getText());
-                try {
-                    f.drawVerticalRainbowStripes(height, width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            } else if (getImageType().equals("franceFlag")) {
-                try {
-                    f.drawFranceFlag(width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            } else if (getImageType().equals("switzerlandFlag")) {
-                try {
-                    f.drawSwitzerlandFlag(width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            } else if (getImageType().equals("greeceFlag")) {
-                try {
-                    f.drawGreeceFlag(width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            } else if (getImageType().equals("checkerboard")) {
-                try {
-                    f.drawCheckerboard(width);
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
+            if (19 < width && width < 2501) {
+                if (getImageType().equals("horizontalRainbowStripes")) {
+                    int height = Integer.parseInt(imageHeightField.getText());
+                    if (9 < height && height < 1201) {
+                        try {
+                            f.drawHorizontalRainbowStripes(height, width);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if (getImageType().equals("verticalRainbowStripes")) {
+                    int height = Integer.parseInt(imageHeightField.getText());
+                    if (9 < height && height < 1201) {
+
+                        try {
+                            f.drawVerticalRainbowStripes(height, width);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if (getImageType().equals("franceFlag")) {
+                    try {
+                        f.drawFranceFlag(width);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                } else if (getImageType().equals("switzerlandFlag")) {
+                    try {
+                        f.drawSwitzerlandFlag(width);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                } else if (getImageType().equals("greeceFlag")) {
+                    try {
+                        f.drawGreeceFlag(width);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    }
+                } else if (getImageType().equals("checkerboard")) {
+                    if (9 < width && width < 151) {
+                        try {
+                            f.drawCheckerboard(width);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
             }
         });
@@ -435,12 +444,14 @@ public class ViewImpl extends JFrame implements View {
         this.imageType = image;
     }
 
-    //
+    // Select file to save or open and return absolute pathname
     private String chooseFile(String chooserType) {
-        // create and add a load file chooser
         JFileChooser chooser = new JFileChooser();
+        String chosen = "";
+        String fileExtension = ".jpg";
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
-        Path path = Path.of("C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/images/");
+        Path path = Path.of("");
         File currentDirectory = path.toFile();
         chooser.setCurrentDirectory(currentDirectory);
         chooser.setFileFilter(filter);
@@ -448,15 +459,15 @@ public class ViewImpl extends JFrame implements View {
         if (chooserType.equals(SAVE)) {
             int returnVal = chooser.showSaveDialog(saveFileMenuItem);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("You chose to save this file: " + chooser.getSelectedFile().getAbsolutePath());
+                chosen = chooser.getSelectedFile().getAbsolutePath().concat(fileExtension);
             }
         } else {
             int returnVal = chooser.showOpenDialog(openFileMenuItem);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
-                System.out.println("You chose to open this file: " + chooser.getSelectedFile().getAbsolutePath());
+                chosen = chooser.getSelectedFile().getAbsolutePath();
             }
         }
-        return chooser.getSelectedFile().getAbsolutePath();
+        return chosen;
     }
 
     /**
