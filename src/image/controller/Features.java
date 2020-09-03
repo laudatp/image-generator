@@ -3,10 +3,11 @@ package image.controller;
 import java.io.IOException;
 
 /**
- * Represents the model.model for the model processing application. This is post-course practice.
+ * Represents this Image application's features.
  * 
  * @author  Peter Laudat
- * @version 5/19/2019
+ * @version 09/2020
+ * 
  */
 public interface Features {
 
@@ -46,20 +47,52 @@ public interface Features {
      */
     void sepia();
 
+    /**
+     * Draw horizontal rainbow striped image.
+     * 
+     * @param imageHeight
+     * @param imageWidth
+     */
     void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
 
+    /**
+     * Draw vertical rainbow striped image.
+     * 
+     * @param imageHeight
+     * @param imageWidth
+     */
     void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
 
+    /**
+     * Draw a checkerboard.
+     * 
+     * @param cellWidth
+     */
     void drawCheckerboard(int cellWidth);
 
+    /**
+     * Draw the French flag.
+     * 
+     * @param flagWidth
+     */
     void drawFranceFlag(int flagWidth);
 
+    /**
+     * Draw the Swiss flag.
+     * 
+     * @param flagWidth
+     */
     void drawSwitzerlandFlag(int flagWidth);
 
+    /**
+     * Draw the Greek flag.
+     * 
+     * @param flagWidth
+     */
     void drawGreeceFlag(int flagWidth);
 
+    /**
+     * Exit program.
+     */
     void exitProgram();
-
-    // void go(Model model) throws IOException;
-
 }

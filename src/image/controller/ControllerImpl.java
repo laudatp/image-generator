@@ -7,6 +7,13 @@ import image.model.Model;
 import image.model.ModelImpl;
 import image.view.View;
 
+/**
+ * Represents the controller implementation for Image viewer application's features.
+ * 
+ * @author  Peter Laudat
+ * @version 09/02/2020
+ *
+ */
 public class ControllerImpl implements Features {
     /** The model to use. */
     private Model model;
@@ -23,16 +30,15 @@ public class ControllerImpl implements Features {
         this.model = new ModelImpl();
     }
 
+    /**
+     * Set the view.
+     * 
+     * @param view
+     */
     public void setView(View view) {
         this.view = view;
         view.setFeatures(this);
     }
-
-    // @Override
-    // public void go(Model model) throws IOException {
-    // // TODO Auto-generated method stub
-    //
-    // }
 
     @Override
     public void load(String imageInfile) throws IOException {
