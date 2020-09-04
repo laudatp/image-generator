@@ -1,4 +1,4 @@
-package image.archive;
+package archive;
 
 import image.model.Model;
 import image.model.Model;

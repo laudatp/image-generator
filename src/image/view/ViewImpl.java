@@ -103,6 +103,8 @@ public class ViewImpl extends JFrame implements View {
     private JMenu checkerboard;
     /** Checkerboard menu item. */
     private JMenuItem checkerboardMenuItem;
+    /** Run batch file of Image Generator commands. */
+    private JMenuItem runBatchFileMenuItem;
 
     /**
      * ViewImpl Constructor.
@@ -126,10 +128,10 @@ public class ViewImpl extends JFrame implements View {
         appMenuBar = new JMenuBar();
 
         // File menu
-        fileMenu = new JMenu("Image");
+        fileMenu = new JMenu("Menu");
 
         // create and add New file menu item to File menu
-        newSubmenu = new JMenu("New");
+        newSubmenu = new JMenu("Generate New Image");
         fileMenu.add(newSubmenu);
 
         // create and add rainbow stripes submenu
@@ -214,15 +216,20 @@ public class ViewImpl extends JFrame implements View {
         checkerboardMenuItem.setActionCommand("Checkerboard Menu Item");
         checkerboard.add(checkerboardMenuItem);
 
-        // create and add Open file file menu item to File menu
-        openFileMenuItem = new JMenuItem("Open File...");
-        openFileMenuItem.setActionCommand("Open File Menu Item");
+        // create and add Open Image file file menu item to File menu
+        openFileMenuItem = new JMenuItem("Open Image File...");
+        openFileMenuItem.setActionCommand("Open Image File Menu Item");
         fileMenu.add(openFileMenuItem);
 
-        // create and add Save to file file menu item to File menu
-        saveFileMenuItem = new JMenuItem("Save to File...");
-        saveFileMenuItem.setActionCommand("Save to File Menu Item");
+        // create and add Save Image File menu item to File menu
+        saveFileMenuItem = new JMenuItem("Save to Image File...");
+        saveFileMenuItem.setActionCommand("Save to Image File Menu Item");
         fileMenu.add(saveFileMenuItem);
+
+        // create and add Run Batch (commands) File file menu item to File menu
+        runBatchFileMenuItem = new JMenuItem("Run Batch File");
+        runBatchFileMenuItem.setActionCommand("Run Batch File Menu Item");
+        fileMenu.add(runBatchFileMenuItem);
 
         // create and add Quit file menu item to File menu
         quitFileMenuItem = new JMenuItem("Quit");
@@ -303,7 +310,7 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Listen for vertical rainbow stripes menu item and set menu accordingly
+        // Listen for vertical rainbow stripes menu item and display appropriate dimension capture pane
         verticalRainbowStripesMenuItem.addActionListener(l -> {
             imageHeightLabel.setVisible(true);
             imageHeightField.setVisible(true);
@@ -312,7 +319,7 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Listen for france flag menu item and set menu accordingly
+        // Listen for france flag menu item and display appropriate dimension capture pane
         franceFlagMenuItem.addActionListener(l -> {
             imageHeightLabel.setVisible(false);
             imageHeightField.setVisible(false);
@@ -321,7 +328,7 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Listen for switzerland flag menu item and set menu accordingly
+        // Listen for switzerland flag menu item and display appropriate dimension capture pane
         switzerlandFlagMenuItem.addActionListener(l -> {
             imageHeightLabel.setVisible(false);
             imageHeightField.setVisible(false);
@@ -330,7 +337,7 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Listen for greece flag menu item and set menu accordingly
+        // Listen for greece flag menu item and display appropriate dimension capture pane
         greeceFlagMenuItem.addActionListener(l -> {
             imageHeightLabel.setVisible(false);
             imageHeightField.setVisible(false);
@@ -339,7 +346,7 @@ public class ViewImpl extends JFrame implements View {
             validate();
         });
 
-        // Listen for checkerboard menu item and set menu accordingly
+        // Listen for checkerboard menu item and display appropriate dimension capture pane
         checkerboardMenuItem.addActionListener(l -> {
             imageHeightLabel.setVisible(false);
             imageHeightField.setVisible(false);
@@ -401,19 +408,19 @@ public class ViewImpl extends JFrame implements View {
             }
         });
 
-        // Blur the current image
-        blurButton.addActionListener(l -> f.blur());
-        // Sharpen the current image
-        sharpenButton.addActionListener(l -> f.sharpen());
-        // Grayscale the current image
-        grayscaleButton.addActionListener(l -> f.grayscale());
-        // Sepia the current image
-        sepiaButton.addActionListener(l -> f.sepia());
+        // Listen for Run Batch File menu item and set menu accordingly
+        runBatchFileMenuItem.addActionListener(l -> {
+            try {
+                f.runBatchFile(chooseBatchFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         // Open image file
         openFileMenuItem.addActionListener(l -> {
             try {
-                f.load(chooseFile(OPEN));
+                f.load(chooseImageFile(OPEN));
                 makeButtonsVisible(true);
             } catch (HeadlessException | IOException e) {
                 e.printStackTrace();
@@ -423,7 +430,7 @@ public class ViewImpl extends JFrame implements View {
         // Save image to file
         saveFileMenuItem.addActionListener(l -> {
             try {
-                f.save(chooseFile(SAVE));
+                f.save(chooseImageFile(SAVE));
             } catch (HeadlessException | IOException e) {
                 e.printStackTrace();
             }
@@ -431,6 +438,14 @@ public class ViewImpl extends JFrame implements View {
 
         // exit program is tied to the exit button
         quitFileMenuItem.addActionListener(l -> f.exitProgram());
+        // Blur the current image
+        blurButton.addActionListener(l -> f.blur());
+        // Sharpen the current image
+        sharpenButton.addActionListener(l -> f.sharpen());
+        // Grayscale the current image
+        grayscaleButton.addActionListener(l -> f.grayscale());
+        // Sepia the current image
+        sepiaButton.addActionListener(l -> f.sepia());
 
     }
 
@@ -445,7 +460,7 @@ public class ViewImpl extends JFrame implements View {
     }
 
     // Select file to save or open and return absolute pathname
-    private String chooseFile(String chooserType) {
+    private String chooseImageFile(String chooserType) {
         JFileChooser chooser = new JFileChooser();
         String chosen = "";
         String fileExtension = ".jpg";
@@ -466,6 +481,21 @@ public class ViewImpl extends JFrame implements View {
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 chosen = chooser.getSelectedFile().getAbsolutePath();
             }
+        }
+        return chosen;
+    }
+
+    // Select file to save or open and return absolute pathname
+    private String chooseBatchFile() {
+        JFileChooser chooser = new JFileChooser();
+        String chosen = "";
+        chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        Path path = Path.of("");
+        File currentDirectory = path.toFile();
+        chooser.setCurrentDirectory(currentDirectory);
+        int returnVal = chooser.showOpenDialog(runBatchFileMenuItem);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            chosen = chooser.getSelectedFile().getAbsolutePath();
         }
         return chosen;
     }

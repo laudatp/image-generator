@@ -1,7 +1,7 @@
 /**
  * 
  */
-package image.archive;
+package archive;
 
 import java.awt.Color;
 

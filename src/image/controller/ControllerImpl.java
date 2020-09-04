@@ -54,69 +54,67 @@ public class ControllerImpl implements Features {
     @Override
     public void blur() {
         model.blur();
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void sharpen() {
         model.sharpen();
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void grayscale() {
         model.grayscale();
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void sepia() {
         model.sepia();
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
         model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
         model.drawVerticalRainbowStripes(imageHeight, imageWidth);
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawCheckerboard(int cellWidth) {
         model.drawCheckerboard(cellWidth);
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawFranceFlag(int flagWidth) {
         model.drawFranceFlag(flagWidth);
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawSwitzerlandFlag(int flagWidth) {
         model.drawSwitzerlandFlag(flagWidth);
-        BufferedImage image = model.getImage();
-        view.updateDisplay(image);
+        updateView();
     }
 
     @Override
     public void drawGreeceFlag(int flagWidth) {
         model.drawGreeceFlag(flagWidth);
+        updateView();
+    }
+
+    /**
+     * 
+     */
+    private void updateView() {
         BufferedImage image = model.getImage();
         view.updateDisplay(image);
     }
@@ -127,6 +125,16 @@ public class ControllerImpl implements Features {
     @Override
     public void exitProgram() {
         System.exit(0);
+    }
+
+    @Override
+    public void go(Model model) throws IOException {
+    }
+
+    @Override
+    public void runBatchFile(String batchFile) throws IOException {
+        // TODO Auto-generated method stub
+
     }
 
 }

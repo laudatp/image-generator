@@ -1,4 +1,4 @@
-package image.driver;
+package archive;
 
 import java.io.FileReader;
 import java.io.IOException;

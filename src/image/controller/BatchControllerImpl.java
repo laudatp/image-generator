@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import image.model.Model;
-import image.view.Features;
 
 /**
  * Implements model controller functions.
@@ -15,7 +14,7 @@ import image.view.Features;
  * @author Peter
  *
  */
-public class BatchControllerImpl implements Controller, Features {
+public class BatchControllerImpl implements Features {
 
     /** Filename extension. */
     private static final String FILE_EXT = ".jpg";

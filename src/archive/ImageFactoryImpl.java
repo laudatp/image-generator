@@ -1,11 +1,12 @@
-package image.model;
+package archive;
 
-import image.archive.Checkerboard;
-import image.archive.FranceFlag;
-import image.archive.GreeceFlag;
-import image.archive.HorizontalRainbow;
-import image.archive.SwitzerlandFlag;
-import image.archive.VerticalRainbow;
+import archive.Checkerboard;
+import archive.FranceFlag;
+import archive.GreeceFlag;
+import archive.HorizontalRainbow;
+import archive.SwitzerlandFlag;
+import archive.VerticalRainbow;
+import model.ImageTypes;
 
 public class ImageFactoryImpl implements ImageFactory {
 
