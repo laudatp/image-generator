@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Represents the model for the Image processing application.
+ * Represents the model for the Image Generator application.
  * 
  * @author  Peter Laudat
  * @version 5/19/2019
@@ -14,16 +14,16 @@ public interface Model {
     /**
      * Loads this model from a file.
      * 
-     * @param  imageInfile
-     * @throws IOException
+     * @param  imageInfile input image file
+     * @throws IOException if issues encountered while reading input image file
      */
     void load(String imageInfile) throws IOException;
 
     /**
      * Saves this model to a file.
      * 
-     * @param  imageOutfile
-     * @throws IOException
+     * @param  imageOutfile output image file
+     * @throws IOException  if issues encountered while writing output image file
      */
     void save(String imageOutfile) throws IOException;
 
@@ -50,51 +50,51 @@ public interface Model {
     /**
      * Draw horizontal rainbow striped image.
      * 
-     * @param imageHeight
-     * @param imageWidth
+     * @param imageHeight image height
+     * @param imageWidth  image width
      */
     void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
 
     /**
      * Draw vertical rainbow striped image.
      * 
-     * @param imageHeight
-     * @param imageWidth
+     * @param imageHeight image height
+     * @param imageWidth  image width
      */
     void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
 
     /**
      * Draw checkerboard.
      * 
-     * @param cellWidth
+     * @param cellWidth cell width
      */
     void drawCheckerboard(int cellWidth);
 
     /**
-     * Draw French flage.
+     * Draw French flag.
      * 
-     * @param flagWidth
+     * @param flagWidth flag width
      */
     void drawFranceFlag(int flagWidth);
 
     /**
      * Draw Swiss flag.
      * 
-     * @param flagWidth
+     * @param flagWidth flag width
      */
     void drawSwitzerlandFlag(int flagWidth);
 
     /**
      * Draw Greek flag.
      * 
-     * @param flagWidth
+     * @param flagWidth flag width
      */
     void drawGreeceFlag(int flagWidth);
 
     /**
      * Get image.
      * 
-     * @return
+     * @return BufferedImage image
      */
     BufferedImage getImage();
 

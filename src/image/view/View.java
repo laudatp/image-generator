@@ -4,6 +4,12 @@ import java.awt.Image;
 
 import image.controller.Features;
 
+/**
+ * Represents the View for the Image Generator application.
+ * 
+ * @author  Peter Laudat
+ * @version 09/20/2019
+ */
 public interface View {
 
     /**
@@ -14,8 +20,18 @@ public interface View {
      */
     void setFeatures(Features f);
 
+    /**
+     * Update this view's display given the input file name.
+     * 
+     * @param inFile input file
+     */
     void updateDisplay(String inFile);
 
+    /**
+     * Update this view's display with the given image.
+     * 
+     * @param image image
+     */
     void updateDisplay(Image image);
 
 }

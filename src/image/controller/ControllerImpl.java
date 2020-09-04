@@ -26,7 +26,7 @@ public class ControllerImpl implements Features {
     /**
      * Constructor.
      * 
-     * @param model
+     * @param model image model
      */
     public ControllerImpl(Model model) {
         this.model = new ModelImpl();
@@ -35,7 +35,7 @@ public class ControllerImpl implements Features {
     /**
      * Set the view.
      * 
-     * @param view
+     * @param view view
      */
     public void setView(View view) {
         this.view = view;
@@ -130,6 +130,12 @@ public class ControllerImpl implements Features {
         System.exit(0);
     }
 
+    /**
+     * Run batch file of Image Generator commands.
+     * 
+     * @param  batchFile   batch file of Image Generator commands
+     * @throws IOException if errors encountered while reading input batch file
+     */
     @Override
     public void runBatchFile(String batchFile) throws IOException {
         try (BufferedReader inFile = new BufferedReader(new FileReader(batchFile))) {

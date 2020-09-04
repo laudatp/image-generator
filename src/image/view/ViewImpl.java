@@ -26,6 +26,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import image.controller.Features;
 
+/**
+ * Implements the View.
+ * 
+ * @author  Peter Laudat
+ * @version 09/20/2020
+ *
+ */
 public class ViewImpl extends JFrame implements View {
     /** System generated serial id. */
     private static final long serialVersionUID = -7293519515508019533L;
@@ -109,7 +116,7 @@ public class ViewImpl extends JFrame implements View {
     /**
      * ViewImpl Constructor.
      * 
-     * @param caption
+     * @param caption application JFrame title
      */
     public ViewImpl(String caption) {
         super(caption);
@@ -397,12 +404,10 @@ public class ViewImpl extends JFrame implements View {
                         e.printStackTrace();
                     }
                 } else if (getImageType().equals("checkerboard")) {
-                    if (9 < width && width < 151) {
-                        try {
-                            f.drawCheckerboard(width);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        f.drawCheckerboard(width / 8);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
                     }
                 }
             }
@@ -504,7 +509,7 @@ public class ViewImpl extends JFrame implements View {
     /**
      * Updates the display with an ImageIcon, or null if the path was invalid.
      * 
-     * @param path
+     * @param path image file's path
      */
     @Override
     public void updateDisplay(String path) {

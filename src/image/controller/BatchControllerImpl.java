@@ -11,9 +11,59 @@ import image.model.Model;
 import image.model.ModelImpl;
 
 /**
- * Implements batchModel controller functions.
+ * Implements controller to read and process formatted batch file of commands.
  * 
- * @author Peter
+ * @author  Peter Laudat
+ * @version 09/20/2020
+ * 
+ * 
+ *          <p>
+ *          Format simple text batch file as follows below:
+ *          </p>
+ *          <ol>
+ *          <li>One command per line</li>
+ *          <li>In each command, separate each token with a space</li>
+ *          <li>All dimensions are in pixels</li>
+ *          </ol>
+ * 
+ *          Command options, formats, and examples are listed below: <br>
+ * 
+ * 
+ *          1. Rainbow Stripes Image Generation Command Format: "Command Height Width"
+ *          <ul>
+ *          <li>drawHorizontalRainbowStripes 600 800</li>
+ *          <li>drawVerticalRainbowStripes 600 800</li>
+ *          </ul>
+ * 
+ *          2. Flag Image Generation Command Format: "Command Width"
+ *          <ul>
+ *          <li>drawSwitzerlandFlag 600</li>
+ *          <li>drawFranceFlag 400</li>
+ *          <li>drawGreekFlag 500</li>
+ *          </ul>
+ * 
+ * 
+ *          3. Checkerboard Image Generation Command Format: "Command Cell_Width"
+ *          <ul>
+ *          <li>drawSwitzerlandFlag 600</li>
+ *          <li>drawFranceFlag 400</li>
+ *          <li>drawGreekFlag 500</li>
+ *          </ul>
+ * 
+ *          4. Image Filter and Transform Command Format: "Command"
+ *          <ul>
+ *          <li>"sharpen"</li>
+ *          <li>"blur"</li>
+ *          <li>"grayscale"</li>
+ *          <li>"sepia"</li>
+ *          </ul>
+ * 
+ *          5. Image File Management Command Format: "Command Fully_Qualified_File_Name"
+ *          <ul>
+ *          <li>"save C:/blah/blah/filename.jpg"</li>
+ *          <li>"load C:/blah/blah/filename.jpg"</li>
+ *          </ul>
+ * 
  *
  */
 public class BatchControllerImpl implements Features {
@@ -219,7 +269,8 @@ public class BatchControllerImpl implements Features {
     /**
      * Write batchModel to a file.
      * 
-     * @throws IOException
+     * @param  imageOutFile image output file name
+     * @throws IOException  if errors encountered writing image to file
      */
     @Override
     public void save(String imageOutFile) throws IOException {

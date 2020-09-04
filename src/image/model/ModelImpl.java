@@ -4,6 +4,13 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Implements the Model.
+ * 
+ * @author  Peter Laudat
+ * @version 09/20/2020
+ *
+ */
 public class ModelImpl implements Model {
     /**
      * Count of color channels.
@@ -685,6 +692,7 @@ public class ModelImpl implements Model {
         return newRGB;
     }
 
+    @Override
     public BufferedImage getImage() {
         return writeImage(rgb, rgb[rgb.length - 1].length, rgb.length);
     }
