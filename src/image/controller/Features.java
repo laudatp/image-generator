@@ -2,8 +2,6 @@ package image.controller;
 
 import java.io.IOException;
 
-import image.model.Model;
-
 /**
  * Represents this Image application's features.
  * 
@@ -98,7 +96,11 @@ public interface Features {
      */
     void exitProgram();
 
-    void go(Model model) throws IOException;
-
+    /**
+     * Process batch file of image generation commands.
+     * 
+     * @param  batchFile
+     * @throws IOException
+     */
     void runBatchFile(String batchFile) throws IOException;
 }

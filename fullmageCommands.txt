@@ -1,83 +1,13 @@
-generateImage horizontalRainbowStripes 600 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+drawHorizontalRainbowStripes 600 800
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow.jpg
 sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedHorizontalRainbowStripes.jpg
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow.jpg
 blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredHorizontalRainbowStripes.jpg
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow.jpg
 grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledHorizontalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledHorizontalRainbowStripes.jpg
+load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow.jpg
 sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedHorizontalRainbowStripes
-generateImage verticalRainbowStripes 600 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledVerticalRainbowStripes
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/verticalRainbowStripes
-sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedVerticalRainbowStripes
-generateImage checkerboard 100
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledcheckerboard
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/checkerboard
-sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedcheckerboard
-generateImage franceFlag 800
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledFranceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/franceFlag
-sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedFranceFlag
-generateImage greeceFlag 900
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledGreeceFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/greeceFlag
-sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedGreeceFlag
-generateImage switzerlandFlag 900
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-sharpen 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-blur 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/blurredSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-grayscale 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/grayscaledSwitzerlandFlag
-load C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/switzerlandFlag
-sepia 
-save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedSwitzerlandFlag
+save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sepiaedHorizontalRainbowStripes.jpg

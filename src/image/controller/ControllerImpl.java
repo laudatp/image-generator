@@ -1,6 +1,8 @@
 package image.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 import image.model.Model;
@@ -112,7 +114,7 @@ public class ControllerImpl implements Features {
     }
 
     /**
-     * 
+     * Update the view.
      */
     private void updateView() {
         BufferedImage image = model.getImage();
@@ -124,17 +126,19 @@ public class ControllerImpl implements Features {
      */
     @Override
     public void exitProgram() {
+        System.out.println("Exiting program");
         System.exit(0);
     }
 
     @Override
-    public void go(Model model) throws IOException {
-    }
-
-    @Override
     public void runBatchFile(String batchFile) throws IOException {
-        // TODO Auto-generated method stub
-
+        try (BufferedReader inFile = new BufferedReader(new FileReader(batchFile))) {
+            Model batchModel = new ModelImpl();
+            BatchControllerImpl batchController = new BatchControllerImpl(batchModel, inFile);
+            batchController.processBatchFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

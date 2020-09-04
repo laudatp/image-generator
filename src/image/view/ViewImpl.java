@@ -53,8 +53,8 @@ public class ViewImpl extends JFrame implements View {
     private JMenuItem openFileMenuItem;
     /** Save File file menu item. */
     private JMenuItem saveFileMenuItem;
-    /** Quit file menu item. */
-    private JMenuItem quitFileMenuItem;
+    /** Exit program file menu item. */
+    private JMenuItem exitProgramFileMenuItem;
     /** Image display. */
     private JLabel display;
     /** Blur button. */
@@ -231,10 +231,10 @@ public class ViewImpl extends JFrame implements View {
         runBatchFileMenuItem.setActionCommand("Run Batch File Menu Item");
         fileMenu.add(runBatchFileMenuItem);
 
-        // create and add Quit file menu item to File menu
-        quitFileMenuItem = new JMenuItem("Quit");
-        quitFileMenuItem.setActionCommand("Quit Menu Item");
-        fileMenu.add(quitFileMenuItem);
+        // create and add Exit Program file menu item to File menu
+        exitProgramFileMenuItem = new JMenuItem("Exit");
+        exitProgramFileMenuItem.setActionCommand("Exit Menu Item");
+        fileMenu.add(exitProgramFileMenuItem);
 
         // add File menu to app menu bar
         appMenuBar.add(fileMenu);
@@ -437,7 +437,7 @@ public class ViewImpl extends JFrame implements View {
         });
 
         // exit program is tied to the exit button
-        quitFileMenuItem.addActionListener(l -> f.exitProgram());
+        exitProgramFileMenuItem.addActionListener(l -> f.exitProgram());
         // Blur the current image
         blurButton.addActionListener(l -> f.blur());
         // Sharpen the current image
@@ -497,6 +497,7 @@ public class ViewImpl extends JFrame implements View {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             chosen = chooser.getSelectedFile().getAbsolutePath();
         }
+        System.out.println("Chosen: " + chosen);
         return chosen;
     }
 

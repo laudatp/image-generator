@@ -3,37 +3,41 @@
  */
 package image.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
 import image.model.Model;
+import image.model.ModelImpl;
 
 /**
- * Implements model controller functions.
+ * Implements batchModel controller functions.
  * 
  * @author Peter
  *
  */
 public class BatchControllerImpl implements Features {
 
-    /** Filename extension. */
-    private static final String FILE_EXT = ".jpg";
-
-    /** The input source. */
+    /** The batchModel to use. */
+    private Model batchModel;
 
     /** Input file or line. */
-    private final Readable in;
+    private final BufferedReader in;
 
-    public BatchControllerImpl(Readable in) {
+    public BatchControllerImpl(Model batchModel, BufferedReader in) {
+        this.batchModel = new ModelImpl();
         this.in = in;
     }
 
-    @Override
-    public void go(Model model) throws IOException {
+    public void processBatchFile() {
+        int imageHeight;
+        int imageWidth;
+        int cellWidth;
         try (Scanner sc = new Scanner(this.in)) {
             while (sc.hasNextLine()) {
                 // read a line
                 String line = readLine(sc);
+                System.out.println(line);
                 // parse the tokens in the line. The first token is the command, which signals the tokens that
                 // follow.
                 try (Scanner tokens = new Scanner(line)) {
@@ -42,44 +46,61 @@ public class BatchControllerImpl implements Features {
                         String imageCommand = tokens.next();
                         switch (imageCommand) {
                             case "load":
-                                loadCommandFile(model, tokens);
+                                try {
+                                    String imageInFile = tokens.next();
+                                    load(imageInFile);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 break;
                             case "save":
-                                writeModelFile(model, tokens);
+                                try {
+                                    String imageOutFile = tokens.next();
+                                    save(imageOutFile);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 break;
                             case "drawhorizontalrainbowstripes":
-                                drawHorizontalRainbowStripes(model, tokens);
+                                imageHeight = Integer.parseInt(tokens.next());
+                                imageWidth = Integer.parseInt(tokens.next());
+                                drawHorizontalRainbowStripes(imageHeight, imageWidth);
                                 break;
                             case "drawverticalrainbowstripes":
-                                drawVerticalRainbowStripes(model, tokens);
+                                imageHeight = Integer.parseInt(tokens.next());
+                                imageWidth = Integer.parseInt(tokens.next());
+                                drawVerticalRainbowStripes(imageHeight, imageWidth);
                                 break;
                             case "drawcheckerboard":
-                                drawCheckerBoard(model, tokens);
+                                cellWidth = Integer.parseInt(tokens.next());
+                                drawCheckerboard(cellWidth);
                                 break;
                             case "drawfranceflag":
-                                drawFranceFlag(model, tokens);
+                                imageWidth = Integer.parseInt(tokens.next());
+                                drawFranceFlag(imageWidth);
                                 break;
                             case "drawswitzerlandflag":
-                                drawSwitzerlandFlag(model, tokens);
+                                imageWidth = Integer.parseInt(tokens.next());
+                                drawSwitzerlandFlag(imageWidth);
                                 break;
                             case "drawgreeceflag":
-                                drawGreeceFlag(model, tokens);
+                                imageWidth = Integer.parseInt(tokens.next());
+                                drawGreeceFlag(imageWidth);
                                 break;
                             case "blur":
-                                blur(model);
+                                blur();
                                 break;
                             case "sharpen":
-                                sharpen(model);
+                                sharpen();
                                 break;
                             case "grayscale":
-                                grayscale(model);
+                                grayscale();
                                 break;
                             case "sepia":
-                                sepia(model);
+                                sepia();
                                 break;
-                            case "quit":
-                                System.out.println("Quitting program");
-                                System.exit(0);
+                            case "exitProgram":
+                                exitProgram();
                                 break;
                             default:
                                 throw new IllegalArgumentException("An illegal command string was provided");
@@ -101,133 +122,119 @@ public class BatchControllerImpl implements Features {
     }
 
     /**
-     * Sepia filter the model.
+     * Sepia filter the batchModel.
      * 
-     * @param model
      */
-    private void sepia(Model model) {
-        model.sepia();
+    @Override
+    public void sepia() {
+        batchModel.sepia();
     }
 
     /**
-     * Grayscale filter the model.
+     * Grayscale filter the batchModel.
      * 
-     * @param model
      */
-    private void grayscale(Model model) {
-        model.grayscale();
+    @Override
+    public void grayscale() {
+        batchModel.grayscale();
     }
 
     /**
-     * Sharpen the model.
+     * Sharpen the batchModel.
      * 
-     * @param model
      */
-    private void sharpen(Model model) {
-        model.sharpen();
+    @Override
+    public void sharpen() {
+        batchModel.sharpen();
     }
 
     /**
-     * Blur the model.
+     * Blur the batchModel.
      * 
-     * @param model
      */
-    private void blur(Model model) {
-        model.blur();
+    @Override
+    public void blur() {
+        batchModel.blur();
     }
 
     /**
      * Draw Greece's flag.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawGreeceFlag(Model model, Scanner tokens) {
-        int imageWidth = tokens.nextInt();
-        model.drawGreeceFlag(imageWidth);
+    @Override
+    public void drawGreeceFlag(int flagWidth) {
+        batchModel.drawGreeceFlag(flagWidth);
     }
 
     /**
      * Draw Switzerland's flag.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawSwitzerlandFlag(Model model, Scanner tokens) {
-        int imageWidth = tokens.nextInt();
-        model.drawSwitzerlandFlag(imageWidth);
+    @Override
+    public void drawSwitzerlandFlag(int flagWidth) {
+        batchModel.drawSwitzerlandFlag(flagWidth);
     }
 
     /**
      * Draw France's flag.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawFranceFlag(Model model, Scanner tokens) {
-        int imageWidth = tokens.nextInt();
-        model.drawFranceFlag(imageWidth);
+    @Override
+    public void drawFranceFlag(int flagWidth) {
+        batchModel.drawFranceFlag(flagWidth);
     }
 
     /**
      * Draw a checkerboard.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawCheckerBoard(Model model, Scanner tokens) {
-        int cellWidth = tokens.nextInt();
-        model.drawCheckerboard(cellWidth);
+    @Override
+    public void drawCheckerboard(int cellWidth) {
+        batchModel.drawCheckerboard(cellWidth);
     }
 
     /**
-     * Draw vertical rainbow striped model with given model height and width.
+     * Draw vertical rainbow striped batchModel with given batchModel height and width.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawVerticalRainbowStripes(Model model, Scanner tokens) {
-        int imageHeight = tokens.nextInt();
-        int imageWidth = tokens.nextInt();
-        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
+    @Override
+    public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
+        batchModel.drawVerticalRainbowStripes(imageHeight, imageWidth);
     }
 
     /**
-     * Draw horizontal rainbow striped model with given model height and width.
+     * Draw horizontal rainbow striped batchModel with given batchModel height and width.
      * 
-     * @param model
-     * @param tokens
      */
-    private void drawHorizontalRainbowStripes(Model model, Scanner tokens) {
-        int imageHeight = tokens.nextInt();
-        int imageWidth = tokens.nextInt();
-        model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+    @Override
+    public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
+        batchModel.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+    }
+
+    @Override
+    public void load(String imageInfile) throws IOException {
+        batchModel.load(imageInfile);
     }
 
     /**
-     * Write model to a file.
+     * Write batchModel to a file.
      * 
-     * @param  model
-     * @param  tokens
      * @throws IOException
      */
-    private void writeModelFile(Model model, Scanner tokens) throws IOException {
-        String filename;
-        filename = tokens.next() + FILE_EXT;
-        model.save(filename);
+    @Override
+    public void save(String imageOutFile) throws IOException {
+        batchModel.save(imageOutFile);
     }
 
-    /**
-     * Load the file containing the model commands.
-     * 
-     * @param  model
-     * @param  tokens
-     * @throws IOException
-     */
-    private void loadCommandFile(Model model, Scanner tokens) throws IOException {
-        String commandFile;
-        commandFile = tokens.next() + FILE_EXT;
-        model.load(commandFile);
+    @Override
+    public void exitProgram() {
+        System.out.println("Exiting program");
+        System.exit(0);
+    }
+
+    @Override
+    public void runBatchFile(String batchFile) throws IOException {
+        // Left empty intentionally
     }
 
 }
