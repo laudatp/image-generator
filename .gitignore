@@ -1,5 +1,4 @@
 # gitignore file
-.gitignore
 # Compiled class file
 *.class
 
@@ -31,3 +30,6 @@ hs_err_pid*
 # IDEA files
 .idea/
 *.iml
+
+
+misc/
