@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * Implements the Model.
+ * Implements the Image model.
  * 
  * @author  Peter Laudat
  * @version 09/20/2020
@@ -55,7 +55,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * Blurs this model.
+     * Blurs this Image.
      */
     @Override
     public void blur() {
@@ -64,7 +64,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * Sharpen this model.
+     * Sharpen this Image.
      */
     @Override
     public void sharpen() {
@@ -72,7 +72,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * Grayscale this model.
+     * Grayscale this Image.
      */
     @Override
     public void grayscale() {
@@ -80,7 +80,7 @@ public class ModelImpl implements Model {
     }
 
     /**
-     * Sepia this model.
+     * Sepia this Image.
      */
     @Override
     public void sepia() {
@@ -301,26 +301,37 @@ public class ModelImpl implements Model {
                 new Color(143, 0, 255)};
     }
 
+    /**
+     * Returns this Image's color channels.
+     * 
+     * @return rgb this image's red green blue color channels
+     */
     public int[][][] getRgb() {
         return this.rgb;
     }
 
     /**
-     * Set rgb.
+     * Set this image's color channels.
      * 
-     * @param rgb the rgb to set
+     * @param rgb the red green blue color channels to set
      */
     public void setRGB(int[][][] rgb) {
         this.rgb = rgb;
     }
 
+    /**
+     * Generate horizontal rainbow-stripes with given image height and width.
+     * 
+     * @param imageHeight image height
+     * @param imageWidth  image width
+     */
     @Override
     public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
         setRGB(generateHorizontalStripes(imageHeight, imageWidth));
     }
 
     /**
-     * Generate horizontally striped model assuming one stripe per unique color.
+     * Generate horizontally striped image assuming one stripe per unique color.
      *
      * @param  imageHeight Model height
      * @param  imageWidth  Model width
@@ -390,13 +401,19 @@ public class ModelImpl implements Model {
         }
     }
 
+    /**
+     * Generate vertical rainbow-stripes with given image height and width.
+     * 
+     * @param imageHeight image height
+     * @param imageWidth  image width
+     */
     @Override
     public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
         setRGB(generateVerticalStripes(imageHeight, imageWidth));
     }
 
     /**
-     * Generate vertically striped model assuming one stripe per unique color.
+     * Generate vertical rainbow striped image with given image height and width.
      * 
      * @param  imageHeight Model height
      * @param  imageWidth  Model width
@@ -425,14 +442,19 @@ public class ModelImpl implements Model {
         return newRgb;
     }
 
+    /**
+     * Draw 8x8 checkerboard with given cell width.
+     * 
+     * @param cellWidth cell width
+     */
     @Override
     public void drawCheckerboard(int cellWidth) {
         setRGB(generateCheckerboard(cellWidth));
     }
 
     /**
-     * Generates 8x8 checkerboard with user-provided checkerboard square width. Assumes black/white
-     * colors.
+     * Generate black and white 8x8 checkerboard with user-provided checkerboard square width. Assumes
+     * black/white colors.
      *
      * @param  squareWidth user-provided checkerboard square width
      * @return             checkerboard model
@@ -493,6 +515,11 @@ public class ModelImpl implements Model {
         return isColor0Active ? colorChannels[0] : colorChannels[1];
     }
 
+    /**
+     * Draw French flag image with given width.
+     * 
+     * @param flagWidth flag width
+     */
     @Override
     public void drawFranceFlag(int flagWidth) {
         setRGB(generateFranceFlagStripes(flagWidth));
@@ -524,6 +551,11 @@ public class ModelImpl implements Model {
         return newRgb;
     }
 
+    /**
+     * Generate Swiss flag image with given width.
+     * 
+     * @param flagWidth flag width
+     */
     @Override
     public void drawSwitzerlandFlag(int flagWidth) {
         setRGB(generateHorizontalStripes(flagWidth));
@@ -584,6 +616,11 @@ public class ModelImpl implements Model {
         return newRGB;
     }
 
+    /**
+     * Generate Greek flag image with given width.
+     * 
+     * @param flagWidth flag width
+     */
     @Override
     public void drawGreeceFlag(int flagWidth) {
         setRGB(generateGreeceFlagStripes(flagWidth));
@@ -692,6 +729,9 @@ public class ModelImpl implements Model {
         return newRGB;
     }
 
+    /**
+     * Get this image.
+     */
     @Override
     public BufferedImage getImage() {
         return writeImage(rgb, rgb[rgb.length - 1].length, rgb.length);
