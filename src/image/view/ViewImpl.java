@@ -7,6 +7,7 @@ import java.awt.HeadlessException;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import javax.swing.BorderFactory;
@@ -471,7 +472,7 @@ public class ViewImpl extends JFrame implements View {
         String fileExtension = ".jpg";
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif");
-        Path path = Path.of("");
+        Path path = FileSystems.getDefault().getPath("");
         File currentDirectory = path.toFile();
         chooser.setCurrentDirectory(currentDirectory);
         chooser.setFileFilter(filter);
@@ -495,7 +496,7 @@ public class ViewImpl extends JFrame implements View {
         JFileChooser chooser = new JFileChooser();
         String chosen = "";
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-        Path path = Path.of("");
+        Path path = FileSystems.getDefault().getPath("");
         File currentDirectory = path.toFile();
         chooser.setCurrentDirectory(currentDirectory);
         int returnVal = chooser.showOpenDialog(runBatchFileMenuItem);

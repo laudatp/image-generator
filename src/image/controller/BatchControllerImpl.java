@@ -68,14 +68,14 @@ import image.model.ModelImpl;
  */
 public class BatchControllerImpl implements Features {
 
-    /** The batchModel to use. */
-    private Model batchModel;
+    /** The model to use. */
+    private Model model;
 
     /** Input file or line. */
     private final BufferedReader in;
 
-    public BatchControllerImpl(Model batchModel, BufferedReader in) {
-        this.batchModel = new ModelImpl();
+    public BatchControllerImpl(Model model, BufferedReader in) {
+        this.model = new ModelImpl();
         this.in = in;
     }
 
@@ -172,39 +172,39 @@ public class BatchControllerImpl implements Features {
     }
 
     /**
-     * Sepia filter the batchModel.
+     * Sepia filter the model.
      * 
      */
     @Override
     public void sepia() {
-        batchModel.sepia();
+        model.sepia();
     }
 
     /**
-     * Grayscale filter the batchModel.
+     * Grayscale filter the model.
      * 
      */
     @Override
     public void grayscale() {
-        batchModel.grayscale();
+        model.grayscale();
     }
 
     /**
-     * Sharpen the batchModel.
+     * Sharpen the model.
      * 
      */
     @Override
     public void sharpen() {
-        batchModel.sharpen();
+        model.sharpen();
     }
 
     /**
-     * Blur the batchModel.
+     * Blur the model.
      * 
      */
     @Override
     public void blur() {
-        batchModel.blur();
+        model.blur();
     }
 
     /**
@@ -213,7 +213,7 @@ public class BatchControllerImpl implements Features {
      */
     @Override
     public void drawGreeceFlag(int flagWidth) {
-        batchModel.drawGreeceFlag(flagWidth);
+        model.drawGreeceFlag(flagWidth);
     }
 
     /**
@@ -222,7 +222,7 @@ public class BatchControllerImpl implements Features {
      */
     @Override
     public void drawSwitzerlandFlag(int flagWidth) {
-        batchModel.drawSwitzerlandFlag(flagWidth);
+        model.drawSwitzerlandFlag(flagWidth);
     }
 
     /**
@@ -231,7 +231,7 @@ public class BatchControllerImpl implements Features {
      */
     @Override
     public void drawFranceFlag(int flagWidth) {
-        batchModel.drawFranceFlag(flagWidth);
+        model.drawFranceFlag(flagWidth);
     }
 
     /**
@@ -240,41 +240,41 @@ public class BatchControllerImpl implements Features {
      */
     @Override
     public void drawCheckerboard(int cellWidth) {
-        batchModel.drawCheckerboard(cellWidth);
+        model.drawCheckerboard(cellWidth);
     }
 
     /**
-     * Draw vertical rainbow striped batchModel with given batchModel height and width.
+     * Draw vertical rainbow striped model with given model height and width.
      * 
      */
     @Override
     public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
-        batchModel.drawVerticalRainbowStripes(imageHeight, imageWidth);
+        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
     }
 
     /**
-     * Draw horizontal rainbow striped batchModel with given batchModel height and width.
+     * Draw horizontal rainbow striped model with given model height and width.
      * 
      */
     @Override
     public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
-        batchModel.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+        model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
     }
 
     @Override
     public void load(String imageInfile) throws IOException {
-        batchModel.load(imageInfile);
+        model.load(imageInfile);
     }
 
     /**
-     * Write batchModel to a file.
+     * Write model to a file.
      * 
      * @param  imageOutFile image output file name
      * @throws IOException  if errors encountered writing image to file
      */
     @Override
     public void save(String imageOutFile) throws IOException {
-        batchModel.save(imageOutFile);
+        model.save(imageOutFile);
     }
 
     @Override
