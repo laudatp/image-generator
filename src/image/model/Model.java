@@ -53,7 +53,7 @@ public interface Model {
      * @param imageHeight image height
      * @param imageWidth  image width
      */
-    void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
+    void horizontalRainbowStripes(int imageHeight, int imageWidth);
 
     /**
      * Draw vertical rainbow striped image.
@@ -61,35 +61,35 @@ public interface Model {
      * @param imageHeight image height
      * @param imageWidth  image width
      */
-    void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
+    void verticalRainbowStripes(int imageHeight, int imageWidth);
 
     /**
      * Draw checkerboard.
      * 
      * @param cellWidth cell width
      */
-    void drawCheckerboard(int cellWidth);
+    void checkerboard(int cellWidth);
 
     /**
      * Draw French flag.
      * 
      * @param flagWidth flag width
      */
-    void drawFranceFlag(int flagWidth);
+    void franceFlag(int flagWidth);
 
     /**
      * Draw Swiss flag.
      * 
      * @param flagWidth flag width
      */
-    void drawSwitzerlandFlag(int flagWidth);
+    void switzerlandFlag(int flagWidth);
 
     /**
      * Draw Greek flag.
      * 
      * @param flagWidth flag width
      */
-    void drawGreeceFlag(int flagWidth);
+    void greeceFlag(int flagWidth);
 
     /**
      * Get image.

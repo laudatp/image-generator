@@ -28,68 +28,28 @@ public interface Features {
     void save(String imageOutfile) throws IOException;
 
     /**
-     * Blur this model.
-     */
-    void blur();
-
-    /**
-     * Sharpen this model.
-     */
-    void sharpen();
-
-    /**
-     * Grayscale this model.
-     */
-    void grayscale();
-
-    /**
-     * Sepia this model.
-     */
-    void sepia();
-
-    /**
-     * Draw horizontal rainbow striped image.
+     * Render an image with the given image command.
      * 
-     * @param imageHeight image height
-     * @param imageWidth  image width
+     * @param imageCommand
      */
-    void drawHorizontalRainbowStripes(int imageHeight, int imageWidth);
+    void render(String imageCommand);
 
     /**
-     * Draw vertical rainbow striped image.
+     * Render an image with the given image command and dimension.
      * 
-     * @param imageHeight image height
-     * @param imageWidth  image width
+     * @param imageCommand
+     * @param width
      */
-    void drawVerticalRainbowStripes(int imageHeight, int imageWidth);
+    void render(String imageCommand, int width);
 
     /**
-     * Draw a checkerboard.
+     * Render an image with the given image command, and two dimensions.
      * 
-     * @param cellWidth cell width
+     * @param imageCommand
+     * @param height
+     * @param width
      */
-    void drawCheckerboard(int cellWidth);
-
-    /**
-     * Draw the French flag.
-     * 
-     * @param flagWidth flag width
-     */
-    void drawFranceFlag(int flagWidth);
-
-    /**
-     * Draw the Swiss flag.
-     * 
-     * @param flagWidth flag width
-     */
-    void drawSwitzerlandFlag(int flagWidth);
-
-    /**
-     * Draw the Greek flag.
-     * 
-     * @param flagWidth flag width
-     */
-    void drawGreeceFlag(int flagWidth);
+    void render(String imageCommand, int height, int width);
 
     /**
      * Exit program.

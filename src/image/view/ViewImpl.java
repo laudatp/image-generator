@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -37,6 +39,10 @@ import image.controller.Features;
 public class ViewImpl extends JFrame implements View {
     /** System generated serial id. */
     private static final long serialVersionUID = -7293519515508019533L;
+    /** One dimensional images. */
+    private static final Set<String> ONE_D_IMAGES = new HashSet<>();
+    /** Two dimensional images. */
+    private static final Set<String> TWO_D_IMAGES = new HashSet<>();
     /** Signal that file chooser should open file. */
     private static final String OPEN = "OPEN";
     /** Signal that chooser should save file. */
@@ -45,6 +51,15 @@ public class ViewImpl extends JFrame implements View {
     private static final String HEIGHT_STRING = "Image Height (pixels)";
     /** String for width label. */
     private static final String WIDTH_STRING = "Image Width (pixels)";
+
+    static {
+        ONE_D_IMAGES.add("checkerboard");
+        ONE_D_IMAGES.add("franceFlag");
+        ONE_D_IMAGES.add("greeceFlag");
+        ONE_D_IMAGES.add("switzerlandFlag");
+        TWO_D_IMAGES.add("horizontalRainbowStripes");
+        TWO_D_IMAGES.add("verticalRainbowStripes");
+    }
     /** Panel. */
     private JPanel contentPanel;
     /** Menu bar. */
@@ -262,22 +277,22 @@ public class ViewImpl extends JFrame implements View {
         // create and add the blur button to the left hand border
         blurButton = new JButton("Blur");
         blurButton.setVisible(true);
-        blurButton.setActionCommand("Blur Button");
+        blurButton.setActionCommand("blur");
 
         // create and add the sharpen button to the border line start
         sharpenButton = new JButton("Sharpen");
         sharpenButton.setVisible(true);
-        sharpenButton.setActionCommand("Sharpen Button");
+        sharpenButton.setActionCommand("sharpen");
 
         // create and add the grayscale button to the border line start
         grayscaleButton = new JButton("Grayscale");
         grayscaleButton.setVisible(true);
-        grayscaleButton.setActionCommand("Grayscale Button");
+        grayscaleButton.setActionCommand("grayscale");
 
         // create and add the sepia button to the border line start
         sepiaButton = new JButton("Sepia");
         sepiaButton.setVisible(true);
-        sepiaButton.setActionCommand("Sepia Button");
+        sepiaButton.setActionCommand("sepia");
 
         // create button group and add the buttons to the group
         buttonGroup = new ButtonGroup();
@@ -366,51 +381,13 @@ public class ViewImpl extends JFrame implements View {
         // Submit user-selected image type and user-entered dimensions to the controller
         imageDimensionsSubmitButton.addActionListener(l -> {
             int width = Integer.parseInt(imageWidthField.getText());
-            if (19 < width && width < 2501) {
-                if (getImageType().equals("horizontalRainbowStripes")) {
-                    int height = Integer.parseInt(imageHeightField.getText());
-                    if (9 < height && height < 1201) {
-                        try {
-                            f.drawHorizontalRainbowStripes(height, width);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else if (getImageType().equals("verticalRainbowStripes")) {
-                    int height = Integer.parseInt(imageHeightField.getText());
-                    if (9 < height && height < 1201) {
-
-                        try {
-                            f.drawVerticalRainbowStripes(height, width);
-                        } catch (NumberFormatException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                } else if (getImageType().equals("franceFlag")) {
-                    try {
-                        f.drawFranceFlag(width);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                } else if (getImageType().equals("switzerlandFlag")) {
-                    try {
-                        f.drawSwitzerlandFlag(width);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                } else if (getImageType().equals("greeceFlag")) {
-                    try {
-                        f.drawGreeceFlag(width);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                } else if (getImageType().equals("checkerboard")) {
-                    try {
-                        f.drawCheckerboard(width / 8);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    }
-                }
+            String imageCommand = this.getImageType();
+            if (ONE_D_IMAGES.contains(imageCommand)) {
+                f.render(imageCommand, width);
+            }
+            if (TWO_D_IMAGES.contains(imageCommand)) {
+                int height = Integer.parseInt(imageHeightField.getText());
+                f.render(imageCommand, height, width);
             }
         });
 
@@ -445,13 +422,13 @@ public class ViewImpl extends JFrame implements View {
         // exit program is tied to the exit button
         exitProgramFileMenuItem.addActionListener(l -> f.exitProgram());
         // Blur the current image
-        blurButton.addActionListener(l -> f.blur());
+        blurButton.addActionListener(l -> f.render(l.getActionCommand()));
         // Sharpen the current image
-        sharpenButton.addActionListener(l -> f.sharpen());
+        sharpenButton.addActionListener(l -> f.render(l.getActionCommand()));
         // Grayscale the current image
-        grayscaleButton.addActionListener(l -> f.grayscale());
+        grayscaleButton.addActionListener(l -> f.render(l.getActionCommand()));
         // Sepia the current image
-        sepiaButton.addActionListener(l -> f.sepia());
+        sepiaButton.addActionListener(l -> f.render(l.getActionCommand()));
 
     }
 
@@ -461,8 +438,8 @@ public class ViewImpl extends JFrame implements View {
     }
 
     // Set the image type
-    private void setImageType(String image) {
-        this.imageType = image;
+    private void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 
     // Select file to save or open and return absolute pathname
@@ -541,4 +518,5 @@ public class ViewImpl extends JFrame implements View {
         grayscaleButton.setVisible(v);
         sepiaButton.setVisible(v);
     }
+
 }
