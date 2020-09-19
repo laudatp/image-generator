@@ -1,4 +1,4 @@
-drawHorizontalRainbowStripes 600 800
+horizontalRainbowStripes 600 800
 save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/horizontalRainbow.jpg
 sharpen 
 save C:/Users/Peter/mygitworkspace/git-repos/mvcPractice/sharpenedHorizontalRainbowStripes.jpg

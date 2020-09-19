@@ -4,6 +4,8 @@
 package image.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +72,9 @@ import image.view.View;
  */
 public class ControllerImpl implements Features {
 
+    /** Indicate that illegal command was provided. */
+    protected static final String ILLEGAL_COMMAND = " is an illegal command";
+
     /** The model to use. */
     private Model model;
     /** The view. */
@@ -114,6 +119,21 @@ public class ControllerImpl implements Features {
         this.switzerlandFlag = width -> this.model.switzerlandFlag(width);
         this.horizontalRainbow = (height, width) -> this.model.horizontalRainbowStripes(height, width);
         this.verticalRainbow = (height, width) -> this.model.verticalRainbowStripes(height, width);
+        this.load = fileName -> {
+            try {
+                this.model.load(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
+
+        this.save = fileName -> {
+            try {
+                this.model.save(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
         this.exitProgram = this::exitProgram;
         this.imageFilters.put("blur", blur);
         this.imageFilters.put("sharpen", sharpen);
@@ -149,7 +169,7 @@ public class ControllerImpl implements Features {
             this.draw(imageTransforms.get(imageCommand));
             this.updateView();
         } else {
-            throw new IllegalArgumentException("Illegal command string " + imageCommand + " was provided");
+            throw new IllegalArgumentException(imageCommand + ILLEGAL_COMMAND);
         }
 
     }
@@ -160,7 +180,7 @@ public class ControllerImpl implements Features {
             this.draw(width, oneDimensionalImages.get(imageCommand));
             this.updateView();
         } else {
-            throw new IllegalArgumentException("Illegal command string " + imageCommand + " was provided");
+            throw new IllegalArgumentException(imageCommand + ILLEGAL_COMMAND);
         }
     }
 
@@ -173,7 +193,7 @@ public class ControllerImpl implements Features {
             this.draw(height, width, twoDimensionalImages.get(imageCommand));
             this.updateView();
         } else {
-            throw new IllegalArgumentException("Illegal command string " + imageCommand + " was provided");
+            throw new IllegalArgumentException(imageCommand + ILLEGAL_COMMAND);
         }
     }
 
@@ -202,7 +222,10 @@ public class ControllerImpl implements Features {
 
     @Override
     public void runBatchFile(String batchFile) throws IOException {
-        // Left empty intentionally
+        BufferedReader infile = new BufferedReader(new FileReader(batchFile));
+        Model batchModel = new ModelImpl();
+        BatchControllerImpl batchControllerImpl = new BatchControllerImpl(batchModel, infile);
+        batchControllerImpl.processBatchFile();
     }
 
     /**
@@ -272,6 +295,10 @@ public class ControllerImpl implements Features {
         void operation(String fileName);
     }
 
+    protected void operate(String fileName, FileOperation fileOperation) {
+        fileOperation.operation(fileName);
+    }
+
     /**
      * Filter an image, e.g., blur or sharpen an image.
      * 
@@ -296,7 +323,7 @@ public class ControllerImpl implements Features {
      * @param width               width
      * @param oneDimensionalImage one dimensional image
      */
-    private void draw(int width, OneDimensionalImage oneDimensionalImage) {
+    protected void draw(int width, OneDimensionalImage oneDimensionalImage) {
         oneDimensionalImage.operation(width);
     }
 
@@ -307,9 +334,189 @@ public class ControllerImpl implements Features {
      * @param width               width
      * @param twoDimensionalImage two dimensional image
      */
-    private void draw(int height, int width, TwoDimensionalImage twoDimensionalImage) {
+    protected void draw(int height, int width, TwoDimensionalImage twoDimensionalImage) {
         System.out.println("Inside draw for rainbow operations");
         twoDimensionalImage.operation(height, width);
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Model getModel() {
+        return model;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public View getView() {
+        return view;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public ImageFilter getBlur() {
+        return blur;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public ImageFilter getSharpen() {
+        return sharpen;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public ImageFilter getExitProgram() {
+        return exitProgram;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public ImageTransform getGrayscale() {
+        return grayscale;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public ImageTransform getSepia() {
+        return sepia;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public TwoDimensionalImage getHorizontalRainbow() {
+        return horizontalRainbow;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public TwoDimensionalImage getVerticalRainbow() {
+        return verticalRainbow;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public OneDimensionalImage getFranceFlag() {
+        return franceFlag;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public OneDimensionalImage getGreeceFlag() {
+        return greeceFlag;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public OneDimensionalImage getSwitzerlandFlag() {
+        return switzerlandFlag;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public OneDimensionalImage getCheckerboard() {
+        return checkerboard;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public FileOperation getSave() {
+        return save;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public FileOperation getLoad() {
+        return load;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Map<String, ImageFilter> getImageFilters() {
+        return imageFilters;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Map<String, ImageTransform> getImageTransforms() {
+        return imageTransforms;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Map<String, TwoDimensionalImage> getTwoDimensionalImages() {
+        return twoDimensionalImages;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Map<String, OneDimensionalImage> getOneDimensionalImages() {
+        return oneDimensionalImages;
+    }
+
+    /**
+     * Return the ${bare_field_name}.
+     * 
+     * @return the ${bare_field_name}
+     */
+    public Map<String, FileOperation> getFileOperations() {
+        return fileOperations;
     }
 
 }
