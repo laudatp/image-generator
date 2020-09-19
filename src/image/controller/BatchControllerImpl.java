@@ -5,6 +5,8 @@ package image.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import image.model.Model;
@@ -74,9 +76,59 @@ public class BatchControllerImpl implements Features {
     /** Input file or line. */
     private final BufferedReader in;
 
+    private ImageOperation blur, sharpen, grayscale, sepia, exitProgram;
+    private RainbowOperation horizontalRainbow, verticalRainbow;
+    private FlagOperation franceFlag, greeceFlag, switzerlandFlag, checkerboard;
+    private FileOperation save, load;
+
+    private Map<String, ImageOperation> imageOperations = new HashMap<>();
+    private Map<String, RainbowOperation> rainbowOperations = new HashMap<>();
+    private Map<String, FlagOperation> flagOperations = new HashMap<>();
+    private Map<String, FileOperation> fileOperations = new HashMap<>();
+
     public BatchControllerImpl(Model model, BufferedReader in) {
         this.model = new ModelImpl();
         this.in = in;
+        blur = model::blur;
+        sharpen = model::sharpen;
+        grayscale = model::grayscale;
+        sepia = model::sepia;
+        checkerboard = cellWidth -> model.checkerboard(cellWidth);
+        franceFlag = (width) -> model.franceFlag(width);
+        greeceFlag = (width) -> model.greeceFlag(width);
+        switzerlandFlag = (width) -> model.switzerlandFlag(width);
+        horizontalRainbow = (height, width) -> model.horizontalRainbowStripes(height, width);
+        verticalRainbow = (height, width) -> model.verticalRainbowStripes(height, width);
+        exitProgram = this::exitProgram;
+        save = filename -> {
+            try {
+                model.save(filename);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        };
+        load = filename -> {
+            try {
+                model.load(filename);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        };
+        imageOperations.put("blur", blur);
+        imageOperations.put("sharpen", sharpen);
+        imageOperations.put("grayscale", grayscale);
+        imageOperations.put("sepia", sepia);
+        imageOperations.put("exitProgram", exitProgram);
+        rainbowOperations.put("drawHorizontalRainbow", horizontalRainbow);
+        rainbowOperations.put("drawVerticalRainbow", verticalRainbow);
+        flagOperations.put("drawCheckerboard", checkerboard);
+        flagOperations.put("drawFranceFlag", franceFlag);
+        flagOperations.put("drawGreeceFlag", greeceFlag);
+        flagOperations.put("drawSwitzerlandFlag", switzerlandFlag);
+        fileOperations.put("save", save);
+        fileOperations.put("load", load);
     }
 
     public void processBatchFile() {
@@ -94,66 +146,16 @@ public class BatchControllerImpl implements Features {
                     while (tokens.hasNext()) {
                         // parse the line into tokens
                         String imageCommand = tokens.next();
-                        switch (imageCommand) {
-                            case "load":
-                                try {
-                                    String imageInFile = tokens.next();
-                                    load(imageInFile);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                break;
-                            case "save":
-                                try {
-                                    String imageOutFile = tokens.next();
-                                    save(imageOutFile);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                break;
-                            case "drawhorizontalrainbowstripes":
-                                imageHeight = Integer.parseInt(tokens.next());
-                                imageWidth = Integer.parseInt(tokens.next());
-                                drawHorizontalRainbowStripes(imageHeight, imageWidth);
-                                break;
-                            case "drawverticalrainbowstripes":
-                                imageHeight = Integer.parseInt(tokens.next());
-                                imageWidth = Integer.parseInt(tokens.next());
-                                drawVerticalRainbowStripes(imageHeight, imageWidth);
-                                break;
-                            case "drawcheckerboard":
-                                cellWidth = Integer.parseInt(tokens.next());
-                                drawCheckerboard(cellWidth);
-                                break;
-                            case "drawfranceflag":
-                                imageWidth = Integer.parseInt(tokens.next());
-                                drawFranceFlag(imageWidth);
-                                break;
-                            case "drawswitzerlandflag":
-                                imageWidth = Integer.parseInt(tokens.next());
-                                drawSwitzerlandFlag(imageWidth);
-                                break;
-                            case "drawgreeceflag":
-                                imageWidth = Integer.parseInt(tokens.next());
-                                drawGreeceFlag(imageWidth);
-                                break;
-                            case "blur":
-                                blur();
-                                break;
-                            case "sharpen":
-                                sharpen();
-                                break;
-                            case "grayscale":
-                                grayscale();
-                                break;
-                            case "sepia":
-                                sepia();
-                                break;
-                            case "exitProgram":
-                                exitProgram();
-                                break;
-                            default:
-                                throw new IllegalArgumentException("An illegal command string was provided");
+                        if (imageOperations.containsKey(imageCommand)) {
+                            imageOperations.get(imageCommand).operation();
+                        } else if (flagOperations.containsKey(imageCommand)) {
+                            flagOperations.get(imageCommand).operation(tokens.nextInt());
+                        } else if (rainbowOperations.containsKey(imageCommand)) {
+                            rainbowOperations.get(imageCommand).operation(tokens.nextInt(), tokens.nextInt());
+                        } else if (fileOperations.containsKey(imageCommand)) {
+                            fileOperations.get(imageCommand).operation(tokens.next());
+                        } else {
+                            throw new IllegalArgumentException("An illegal command string was provided");
                         }
                     }
                 }
@@ -208,30 +210,30 @@ public class BatchControllerImpl implements Features {
     }
 
     /**
-     * Draw Greece's flag.
+     * Draw Greece's flags.
      * 
      */
     @Override
     public void drawGreeceFlag(int flagWidth) {
-        model.drawGreeceFlag(flagWidth);
+        model.greeceFlag(flagWidth);
     }
 
     /**
-     * Draw Switzerland's flag.
+     * Draw Switzerland's flags.
      * 
      */
     @Override
     public void drawSwitzerlandFlag(int flagWidth) {
-        model.drawSwitzerlandFlag(flagWidth);
+        model.switzerlandFlag(flagWidth);
     }
 
     /**
-     * Draw France's flag.
+     * Draw France's flags.
      * 
      */
     @Override
     public void drawFranceFlag(int flagWidth) {
-        model.drawFranceFlag(flagWidth);
+        model.franceFlag(flagWidth);
     }
 
     /**
@@ -240,25 +242,25 @@ public class BatchControllerImpl implements Features {
      */
     @Override
     public void drawCheckerboard(int cellWidth) {
-        model.drawCheckerboard(cellWidth);
+        model.checkerboard(cellWidth);
     }
 
     /**
-     * Draw vertical rainbow striped model with given model height and width.
+     * Draw vertical rainbows striped model with given model height and width.
      * 
      */
     @Override
     public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
-        model.drawVerticalRainbowStripes(imageHeight, imageWidth);
+        model.verticalRainbowStripes(imageHeight, imageWidth);
     }
 
     /**
-     * Draw horizontal rainbow striped model with given model height and width.
+     * Draw horizontal rainbows striped model with given model height and width.
      * 
      */
     @Override
     public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
-        model.drawHorizontalRainbowStripes(imageHeight, imageWidth);
+        model.horizontalRainbowStripes(imageHeight, imageWidth);
     }
 
     @Override
@@ -286,6 +288,42 @@ public class BatchControllerImpl implements Features {
     @Override
     public void runBatchFile(String batchFile) throws IOException {
         // Left empty intentionally
+    }
+
+    @FunctionalInterface
+    interface ImageOperation {
+        void operation();
+    }
+
+    @FunctionalInterface
+    interface FlagOperation {
+        void operation(int width);
+    }
+
+    @FunctionalInterface
+    interface RainbowOperation {
+        void operation(int height, int width);
+    }
+
+    @FunctionalInterface
+    interface FileOperation {
+        void operation(String fileName);
+    }
+
+    private void operate(ImageOperation imageOperation) {
+        imageOperation.operation();
+    }
+
+    private void operate(int width, FlagOperation flagOperation) {
+        flagOperation.operation(width);
+    }
+
+    private void operate(int height, int width, RainbowOperation rainbowOperation) {
+        rainbowOperation.operation(height, width);
+    }
+
+    private void operate(String fileName, FileOperation fileOperation) {
+        fileOperation.operation(fileName);
     }
 
 }

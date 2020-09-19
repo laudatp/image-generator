@@ -326,7 +326,7 @@ public class ModelImpl implements Model {
      * @param imageWidth  image width
      */
     @Override
-    public void drawHorizontalRainbowStripes(int imageHeight, int imageWidth) {
+    public void horizontalRainbowStripes(int imageHeight, int imageWidth) {
         setRGB(generateHorizontalStripes(imageHeight, imageWidth));
     }
 
@@ -408,7 +408,7 @@ public class ModelImpl implements Model {
      * @param imageWidth  image width
      */
     @Override
-    public void drawVerticalRainbowStripes(int imageHeight, int imageWidth) {
+    public void verticalRainbowStripes(int imageHeight, int imageWidth) {
         setRGB(generateVerticalStripes(imageHeight, imageWidth));
     }
 
@@ -448,7 +448,7 @@ public class ModelImpl implements Model {
      * @param cellWidth cell width
      */
     @Override
-    public void drawCheckerboard(int cellWidth) {
+    public void checkerboard(int cellWidth) {
         setRGB(generateCheckerboard(cellWidth));
     }
 
@@ -521,7 +521,7 @@ public class ModelImpl implements Model {
      * @param flagWidth flag width
      */
     @Override
-    public void drawFranceFlag(int flagWidth) {
+    public void franceFlag(int flagWidth) {
         setRGB(generateFranceFlagStripes(flagWidth));
     }
 
@@ -557,7 +557,7 @@ public class ModelImpl implements Model {
      * @param flagWidth flag width
      */
     @Override
-    public void drawSwitzerlandFlag(int flagWidth) {
+    public void switzerlandFlag(int flagWidth) {
         setRGB(generateHorizontalStripes(flagWidth));
     }
 
@@ -622,7 +622,7 @@ public class ModelImpl implements Model {
      * @param flagWidth flag width
      */
     @Override
-    public void drawGreeceFlag(int flagWidth) {
+    public void greeceFlag(int flagWidth) {
         setRGB(generateGreeceFlagStripes(flagWidth));
     }
 
