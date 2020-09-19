@@ -79,17 +79,33 @@ public class ControllerImpl implements Features {
     private Model model;
     /** The view. */
     private View view;
-
-    /** Blur or sharpen image filters. */
-    private ImageFilter blur, sharpen, exitProgram;
+    /** Blur image filter. */
+    private ImageFilter blur;
+    /** Sharpen image filter. */
+    private ImageFilter sharpen;
+    /** Exit program. */
+    private ImageFilter exitProgram;
     /** Grayscale and sepia image transforms. */
-    private ImageTransform grayscale, sepia;
-    /** Rainbow image generation commands. */
-    private TwoDimensionalImage horizontalRainbow, verticalRainbow;
-    /** Flag image generation commands. */
-    private OneDimensionalImage franceFlag, greeceFlag, switzerlandFlag, checkerboard;
-    /** File operation commands. */
-    private FileOperation save, load;
+    private ImageTransform grayscale;
+    /** Sepia image transform. */
+    private ImageTransform sepia;
+    /** French flag image. */
+    private OneDimensionalImage franceFlag;
+    /** Greek flag image. */
+    private OneDimensionalImage greeceFlag;
+    /** Swiss flag image. */
+    private OneDimensionalImage switzerlandFlag;
+    /** Checkerboard image. */
+    private OneDimensionalImage checkerboard;
+
+    /** Horizontal rainbow stripes image. */
+    private TwoDimensionalImage horizontalRainbow;
+    /** Vertical rainbow stripes image. */
+    private TwoDimensionalImage verticalRainbow;
+    /** Save file operation. */
+    private FileOperation save;
+    /** Load file operation. */
+    private FileOperation load;
 
     /** Image filters. */
     private Map<String, ImageFilter> imageFilters = new HashMap<>();
@@ -108,7 +124,7 @@ public class ControllerImpl implements Features {
      * @param model
      */
     public ControllerImpl(Model model) {
-        this.model = new ModelImpl();
+        this.model = model;
         this.blur = this.model::blur;
         this.sharpen = this.model::sharpen;
         this.grayscale = this.model::grayscale;

@@ -66,9 +66,6 @@ import image.model.Model;
  */
 public class BatchControllerImpl extends ControllerImpl {
 
-    /** The model to use. */
-    private Model model;
-
     /** Input file or line. */
     private final BufferedReader in;
 
