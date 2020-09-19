@@ -480,7 +480,6 @@ public class ViewImpl extends JFrame implements View {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             chosen = chooser.getSelectedFile().getAbsolutePath();
         }
-        System.out.println("Chosen: " + chosen);
         return chosen;
     }
 

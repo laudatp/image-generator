@@ -186,10 +186,7 @@ public class ControllerImpl implements Features {
 
     @Override
     public void render(String imageCommand, int height, int width) {
-        System.out.println("Inside draw for rainbow images");
-        System.out.println(imageCommand);
         if (twoDimensionalImages.containsKey(imageCommand)) {
-            System.out.println("Inside twoDimensionalImage.containsKey conditional");
             this.draw(height, width, twoDimensionalImages.get(imageCommand));
             this.updateView();
         } else {
@@ -216,7 +213,6 @@ public class ControllerImpl implements Features {
 
     @Override
     public void exitProgram() {
-        System.out.println("Exiting program");
         System.exit(0);
     }
 
@@ -232,12 +228,8 @@ public class ControllerImpl implements Features {
      * Update the view.
      */
     private void updateView() {
-        System.out.println("Inside updateView");
-        System.out.println("Before getImage");
         BufferedImage image = this.model.getImage();
-        System.out.println("After getImage and before view.updateDisplay");
         view.updateDisplay(image);
-        System.out.println("After view.updateDisplay");
     }
 
     /**
@@ -335,7 +327,6 @@ public class ControllerImpl implements Features {
      * @param twoDimensionalImage two dimensional image
      */
     protected void draw(int height, int width, TwoDimensionalImage twoDimensionalImage) {
-        System.out.println("Inside draw for rainbow operations");
         twoDimensionalImage.operation(height, width);
     }
 

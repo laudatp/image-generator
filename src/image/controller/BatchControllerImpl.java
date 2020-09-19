@@ -77,6 +77,9 @@ public class BatchControllerImpl extends ControllerImpl {
         this.in = in;
     }
 
+    /**
+     * Process batch file containing command lines.
+     */
     public void processBatchFile() {
         int imageHeight;
         int imageWidth;
@@ -85,7 +88,6 @@ public class BatchControllerImpl extends ControllerImpl {
             while (sc.hasNextLine()) {
                 // read a line
                 String line = sc.nextLine();
-                System.out.println(line);
                 // parse the tokens in the line. The first token is the command, which signals the tokens that
                 // follow.
                 try (Scanner tokens = new Scanner(line)) {
